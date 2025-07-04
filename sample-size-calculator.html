@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Size Calculator | Youth Research Journal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #60ad5e;
+            --primary-dark: #005005;
+            --secondary-color: #f5f5f5;
+            --accent-color: #ffab00;
+            --text-color: #333;
+            --light-text: #fff;
+            --gray-text: #666;
+            --light-gray: #eee;
+            --medium-gray: #ddd;
+            --dark-gray: #444;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-text);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #c8e6c9;
+            border-bottom: 2px solid var(--light-text);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(46, 125, 50, 0.9), rgba(46, 125, 50, 0.95)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--light-text);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #ffb74d;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--light-text);
+            border: 2px solid var(--light-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-dark);
+            position: relative;
+            font-size: 2.2rem;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem auto 0;
+        }
+
+        .calculator-container {
+            background-color: var(--light-text);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            transition: var(--transition);
+        }
+
+        .calculator-container:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .calculator-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+
+        .input-hint {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #fafafa;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+            background-color: var(--light-text);
+        }
+
+        .result {
+            background-color: #e8f5e9;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 3rem;
+            text-align: center;
+            display: none;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .result h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .sample-size {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1.5rem 0;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            background-color: var(--light-text);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .info-section {
+            background-color: var(--secondary-color);
+        }
+
+        .content-section {
+            background-color: var(--light-text);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-section h3 {
+            color: var(--primary-dark);
+            margin: 2rem 0 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul, .content-section ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .highlight-box h4 {
+            color: #0d47a1;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .formula-box {
+            background-color: #f5f5f5;
+            border: 1px solid var(--medium-gray);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background-color: var(--light-text);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h3 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .tab-container {
+            margin-top: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--medium-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-text);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-light);
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--light-text);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--light-text);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdbdbd;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.4rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1.5rem;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .calculator-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+            nav.active {
+                display: block;
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .sample-size {
+                font-size: 2.5rem;
+                padding: 0.5rem 1.5rem;
+            }
+            
+            .calculator-container {
+                padding: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <img src="https://yrjournal.org/images/Logo.PNG" alt="Youth Research Journal Logo">
+                <h1>Youth Research Journal</h1>
+            </a>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#calculator" class="active">Calculator</a></li>
+                    <li><a href="#what-is">What is Sample Size?</a></li>
+                    <li><a href="#how-to-calculate">How to Calculate</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Advanced Research Sample Size Calculator</h2>
+            <p>Ensure your research has statistical significance with our comprehensive sample size calculator and detailed methodology guide. Perfect for student researchers and academic projects.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#calculator" class="btn btn-primary">Try Calculator</a>
+                <a href="#how-to-calculate" class="btn btn-secondary">Learn Methodology</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2 class="section-title">Sample Size Calculator</h2>
+            <div class="calculator-container">
+                <form id="sampleCalculator" class="calculator-form">
+                    <div class="form-group">
+                        <label for="population">Population Size:</label>
+                        <input type="number" id="population" placeholder="Enter total population size (if known)">
+                        <span class="input-hint">Leave blank if population is very large or unknown</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confidence">Confidence Level:</label>
+                        <select id="confidence">
+                            <option value="99">99% (Highest accuracy)</option>
+                            <option value="95" selected>95% (Standard for academic research)</option>
+                            <option value="90">90%</option>
+                            <option value="80">80%</option>
+                        </select>
+                        <span class="input-hint">Probability that your results reflect the population</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="margin">Margin of Error (%):</label>
+                        <input type="number" id="margin" value="5" min="1" max="20">
+                        <span class="input-hint">Acceptable range of error (typically 5% for social sciences)</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="distribution">Response Distribution (%):</label>
+                        <input type="number" id="distribution" value="50" min="1" max="99">
+                        <span class="input-hint">Use 50% for maximum variability (most conservative)</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-calculator"></i> Calculate Sample Size
+                        </button>
+                    </div>
+                </form>
+
+                <div id="result" class="result">
+                    <h3>Recommended Sample Size</h3>
+                    <div class="sample-size" id="sampleSize">0</div>
+                    <p id="resultText">This is the minimum number of respondents needed for your research to be statistically significant at the selected confidence level.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="what-is" class="content-section">
+        <div class="container">
+            <div class="content-section">
+                <h2>What is Sample Size?</h2>
+                <p>Sample size refers to the number of individual samples measured or observations used in a survey or experiment. In research, it's the number of subjects, respondents, or observations included in your study.</p>
+                
+                <h3>Why Sample Size Matters</h3>
+                <p>Choosing an appropriate sample size is crucial because:</p>
+                <ul>
+                    <li>It affects the reliability and validity of your research findings</li>
+                    <li>Too small a sample may not represent the population accurately</li>
+                    <li>Too large a sample may waste resources without adding value</li>
+                    <li>It impacts the statistical power of your study</li>
+                    <li>Proper sample size ensures ethical research practices</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h4>Key Concept</h4>
+                    <p>The sample size is a balance between practical constraints (time, budget) and statistical requirements (precision, confidence). The goal is to select the smallest sample that will provide the most accurate results.</p>
+                </div>
+                
+                <h3>What is a Good Sample Size?</h3>
+                <p>A "good" sample size depends on several factors:</p>
+                <ul>
+                    <li><strong>Research objectives</strong>: Descriptive studies vs. hypothesis testing</li>
+                    <li><strong>Population variability</strong>: More diverse populations require larger samples</li>
+                    <li><strong>Desired precision</strong>: Smaller margins of error require larger samples</li>
+                    <li><strong>Confidence level</strong>: Higher confidence requires larger samples</li>
+                    <li><strong>Expected effect size</strong>: Smaller expected effects require larger samples</li>
+                </ul>
+                
+                <h3>What is a Large Sample Size?</h3>
+                <p>While definitions vary by field:</p>
+                <ul>
+                    <li>In social sciences: 100-1,000 respondents is common</li>
+                    <li>In medical research: Hundreds to thousands may be needed</li>
+                    <li>For national surveys: 1,000-2,500 is typical</li>
+                    <li>In qualitative research: 15-50 participants may suffice</li>
+                </ul>
+                <p>A sample is "large" when adding more participants doesn't significantly change your results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-to-calculate" class="info-section">
+        <div class="container">
+            <div class="content-section">
+                <h2>How to Calculate Sample Size</h2>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="formula">Formula</button>
+                        <button class="tab-btn" data-tab="factors">Key Factors</button>
+                        <button class="tab-btn" data-tab="examples">Examples</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="formula-tab">
+                        <h3>Sample Size Formula</h3>
+                        <p>The basic formula for calculating sample size (for infinite populations) is:</p>
+                        
+                        <div class="formula-box">
+                            n = (Z² × p × (1-p)) / e²
+                        </div>
+                        
+                        <p>Where:</p>
+                        <ul>
+                            <li><strong>n</strong> = sample size</li>
+                            <li><strong>Z</strong> = Z-score (standard score corresponding to your chosen confidence level)</li>
+                            <li><strong>p</strong> = response distribution (proportion)</li>
+                            <li><strong>e</strong> = margin of error</li>
+                        </ul>
+                        
+                        <h4>For Finite Populations</h4>
+                        <p>When you know the population size (N), the adjusted formula is:</p>
+                        
+                        <div class="formula-box">
+                            n' = n / (1 + ((n - 1) / N))
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <h4>Z-Score Values</h4>
+                            <p>Common confidence levels and their corresponding Z-scores:</p>
+                            <ul>
+                                <li>99% confidence → Z = 2.576</li>
+                                <li>95% confidence → Z = 1.96</li>
+                                <li>90% confidence → Z = 1.645</li>
+                                <li>80% confidence → Z = 1.282</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="factors-tab">
+                        <h3>Key Factors Affecting Sample Size</h3>
+                        
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h3><i class="fas fa-chart-line"></i> Confidence Level</h3>
+                                <p>How confident you need to be that your results reflect the true population value. Higher confidence requires larger samples.</p>
+                            </div>
+                            <div class="info-card">
+                                <h3><i class="fas fa-bullseye"></i> Margin of Error</h3>
+                                <p>The acceptable amount of error in your results. Smaller margins require larger samples.</p>
+                            </div>
+                            <div class="info-card">
+                                <h3><i class="fas fa-users"></i> Population Size</h3>
+                                <p>Total size of the group you're studying. Only matters for small populations.</p>
+                            </div>
+                            <div class="info-card">
+                                <h3><i class="fas fa-percentage"></i> Response Distribution</h3>
+                                <p>Expected distribution of responses. 50% is most conservative (requires largest sample).</p>
+                            </div>
+                        </div>
+                        
+                        <h4>Confidence Level vs. Sample Size Relationship</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Confidence Level</th>
+                                    <th>Z-Score</th>
+                                    <th>Relative Sample Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>99%</td>
+                                    <td>2.576</td>
+                                    <td>Largest</td>
+                                </tr>
+                                <tr>
+                                    <td>95%</td>
+                                    <td>1.96</td>
+                                    <td>Medium (standard)</td>
+                                </tr>
+                                <tr>
+                                    <td>90%</td>
+                                    <td>1.645</td>
+                                    <td>Smaller</td>
+                                </tr>
+                                <tr>
+                                    <td>80%</td>
+                                    <td>1.282</td>
+                                    <td>Smallest</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="tab-content" id="examples-tab">
+                        <h3>Sample Size Calculation Examples</h3>
+                        
+                        <h4>Example 1: National Survey</h4>
+                        <p><strong>Scenario:</strong> Surveying voter preferences for a national election</p>
+                        <ul>
+                            <li>Population: 50 million eligible voters</li>
+                            <li>Confidence level: 95% (Z = 1.96)</li>
+                            <li>Margin of error: 3%</li>
+                            <li>Response distribution: 50% (most conservative)</li>
+                        </ul>
+                        <p><strong>Calculation:</strong> (1.96² × 0.5 × 0.5) / 0.03² = 1,067 respondents</p>
+                        
+                        <h4>Example 2: University Research</h4>
+                        <p><strong>Scenario:</strong> Studying student satisfaction at a university</p>
+                        <ul>
+                            <li>Population: 10,000 students</li>
+                            <li>Confidence level: 95% (Z = 1.96)</li>
+                            <li>Margin of error: 5%</li>
+                            <li>Response distribution: 50%</li>
+                        </ul>
+                        <p><strong>Calculation:</strong> First calculate infinite population size: (1.96² × 0.5 × 0.5) / 0.05² = 384. Then adjust for finite population: 384 / (1 + (383/10000)) ≈ 370 students</p>
+                        
+                        <h4>Example 3: Medical Study</h4>
+                        <p><strong>Scenario:</strong> Clinical trial for a new medication</p>
+                        <ul>
+                            <li>Population: Patients with specific condition (unknown size)</li>
+                            <li>Confidence level: 99% (Z = 2.576)</li>
+                            <li>Margin of error: 2%</li>
+                            <li>Response distribution: 50%</li>
+                        </ul>
+                        <p><strong>Calculation:</strong> (2.576² × 0.5 × 0.5) / 0.02² = 4,147 participants</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="best-practices" class="content-section">
+        <div class="container">
+            <div class="content-section">
+                <h2>Sample Size Best Practices</h2>
+                
+                <h3>Planning Your Sample Size</h3>
+                <ul>
+                    <li><strong>Conduct a power analysis</strong> for experimental studies to determine minimum sample size needed to detect an effect</li>
+                    <li><strong>Consider your research design</strong> - different methods require different sample size approaches</li>
+                    <li><strong>Account for expected attrition</strong> - add 10-20% more participants if you anticipate dropouts</li>
+                    <li><strong>Check similar studies</strong> in your field for typical sample sizes</li>
+                    <li><strong>Balance precision and practicality</strong> - don't collect more data than you can properly analyze</li>
+                </ul>
+                
+                <h3>Common Sample Size Mistakes to Avoid</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Too Small Samples</h3>
+                        <p>Results may not be statistically significant or generalizable. Increases risk of Type II errors (false negatives).</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Arbitrary Numbers</h3>
+                        <p>Choosing sample sizes based on convenience rather than statistical calculation leads to unreliable results.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Ignoring Population Size</h3>
+                        <p>For small populations (under 5,000), failing to adjust sample size calculations can lead to oversampling.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Uneven Group Sizes</h3>
+                        <p>In comparative studies, unequal group sizes reduce statistical power and can bias results.</p>
+                    </div>
+                </div>
+                
+                <h3>Special Considerations</h3>
+                <div class="highlight-box">
+                    <h4>Qualitative Research</h4>
+                    <p>Sample size is determined by theoretical saturation (when no new information is obtained) rather than statistical power. Typically 15-50 participants.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>Experimental Studies</h4>
+                    <p>Focus on statistical power (typically 80% or higher) to detect meaningful effects. Power analysis is essential.</p>
+                </div>
+                
+                <h3>Resources for Further Learning</h3>
+                <ul>
+                    <li>Cohen, J. (1992). A power primer. Psychological Bulletin, 112(1), 155-159.</li>
+                    <li>Krejcie, R. V., & Morgan, D. W. (1970). Determining sample size for research activities. Educational and Psychological Measurement, 30, 607-610.</li>
+                    <li>Charan, J., & Biswas, T. (2013). How to calculate sample size for different study designs in medical research? Indian Journal of Psychological Medicine, 35(2), 121-126.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Youth Research Journal</h3>
+                    <p>Empowering student researchers with tools and knowledge for academic excellence. Developed by <a href="https://md-sanaul-haque-shanto.github.io/">Md Sanaul Haque Shanto</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#calculator">Sample Size Calculator</a>
+                    <a href="#what-is">What is Sample Size?</a>
+                    <a href="#how-to-calculate">Calculation Methods</a>
+                    <a href="#best-practices">Best Practices</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <a href="#">Research Methodology Guide</a>
+                    <a href="#">Statistical Tools</a>
+                    <a href="#">Academic Writing Tips</a>
+                    <a href="#">Publication Opportunities</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@yrjournal.org</p>
+                    <p><i class="fas fa-phone"></i></p>
+                    <p><i class="fas fa-map-marker-alt"></i></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 Youth Research Journal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and content
+                tabBtns.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+
+        // Sample size calculator
+        document.getElementById('sampleCalculator').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get input values
+            const population = document.getElementById('population').value;
+            const confidence = parseFloat(document.getElementById('confidence').value);
+            const margin = parseFloat(document.getElementById('margin').value) / 100;
+            const distribution = parseFloat(document.getElementById('distribution').value) / 100;
+            
+            // Validate inputs
+            if (margin <= 0 || margin >= 1) {
+                alert('Margin of error must be between 1% and 20%');
+                return;
+            }
+            
+            if (distribution <= 0 || distribution >= 1) {
+                alert('Response distribution must be between 1% and 99%');
+                return;
+            }
+            
+            // Calculate z-score based on confidence level
+            let zScore;
+            switch(confidence) {
+                case 99: zScore = 2.576; break;
+                case 95: zScore = 1.96; break;
+                case 90: zScore = 1.645; break;
+                case 80: zScore = 1.282; break;
+                default: zScore = 1.96;
+            }
+            
+            // Calculate sample size
+            let sampleSize;
+            if (population && population > 0) {
+                // Finite population correction
+                const numerator = (zScore * zScore * distribution * (1 - distribution)) / (margin * margin);
+                const denominator = 1 + ((zScore * zScore * distribution * (1 - distribution)) / (margin * margin * population));
+                sampleSize = numerator / denominator;
+                sampleSize = Math.ceil(sampleSize);
+                
+                // Ensure sample size doesn't exceed population
+                if (sampleSize > population) {
+                    sampleSize = population;
+                }
+                
+                // Update result text
+                document.getElementById('resultText').textContent = `For a population of ${population}, you need a minimum of ${sampleSize} respondents for your research to be statistically significant at the ${confidence}% confidence level with a ${margin*100}% margin of error.`;
+            } else {
+                // Infinite population
+                sampleSize = (zScore * zScore * distribution * (1 - distribution)) / (margin * margin);
+                sampleSize = Math.ceil(sampleSize);
+                
+                // Update result text
+                document.getElementById('resultText').textContent = `For a large or unknown population, you need a minimum of ${sampleSize} respondents for your research to be statistically significant at the ${confidence}% confidence level with a ${margin*100}% margin of error.`;
+            }
+            
+            // Display result
+            document.getElementById('sampleSize').textContent = sampleSize;
+            document.getElementById('result').style.display = 'block';
+            
+            // Scroll to result
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Close mobile menu if open
+                document.querySelector('nav').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
