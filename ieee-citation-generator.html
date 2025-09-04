@@ -1,1318 +1,1055 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-      <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C5LLP0WEBK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-C5LLP0WEBK');
-</script>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IEEE Advanced Citation Generator | Youth Research Journal</title>
-    <style>
-        :root {
-            --primary-color: #2e7d32;
-            --primary-light: #60ad5e;
-            --primary-dark: #005005;
-            --secondary-color: #f5f5f5;
-            --text-color: #333;
-            --light-text: #f5f5f5;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f9f9f9;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            padding: 20px 0;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .form-section {
-            flex: 1;
-            min-width: 300px;
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .result-section {
-            flex: 1;
-            min-width: 300px;
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-light);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary-dark);
-        }
-
-        input[type="text"],
-        input[type="url"],
-        input[type="date"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border 0.3s;
-        }
-
-        input[type="text"]:focus,
-        input[type="url"]:focus,
-        input[type="date"]:focus,
-        select:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .citation-result {
-            background-color: var(--secondary-color);
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 20px;
-            border-left: 4px solid var(--primary-color);
-            word-wrap: break-word;
-            margin-bottom: 15px;
-        }
-
-        .copy-btn {
-            background-color: var(--primary-light);
-            margin-top: 5px;
-            width: auto;
-            padding: 8px 15px;
-            font-size: 14px;
-        }
-
-        .copy-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .source-type-fields {
-            display: none;
-        }
-
-        .source-type-fields.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .authors-container {
-            margin-bottom: 15px;
-        }
-
-        .author-input {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .author-input input {
-            flex: 1;
-        }
-
-        .add-author-btn {
-            background-color: var(--primary-light);
-            margin-bottom: 15px;
-        }
-
-        .remove-author-btn {
-            background-color: #d32f2f;
-            padding: 8px 12px;
-            width: auto;
-        }
-
-        .remove-author-btn:hover {
-            background-color: #b71c1c;
-        }
-
-        .fetch-btn {
-            background-color: var(--primary-light);
-            position: absolute;
-            right: 0;
-            top: 30px;
-            width: auto;
-            padding: 8px 12px;
-            font-size: 14px;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 8px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .status-message {
-            margin-top: 5px;
-            font-size: 0.9rem;
-            min-height: 20px;
-        }
-
-        .success {
-            color: var(--primary-dark);
-        }
-
-        .error {
-            color: #d32f2f;
-        }
-
-        .citation-history {
-            margin-top: 30px;
-        }
-
-        .citation-item {
-            background-color: white;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .citation-item .copy-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-        }
-
-        .delete-btn {
-            background-color: #d32f2f;
-            position: absolute;
-            top: 15px;
-            right: 90px;
-            width: auto;
-            padding: 8px 15px;
-            font-size: 14px;
-        }
-
-        .delete-btn:hover {
-            background-color: #b71c1c;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .citation-item .copy-btn {
-                position: static;
-                display: inline-block;
-                margin-right: 10px;
-            }
-            
-            .delete-btn {
-                position: static;
-                display: inline-block;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IEEE Advanced Citation Generator | Youth Research Journal</title>
+  <style>
+    :root {
+      --primary-color: #2e7d32;
+      --primary-light: #60ad5e;
+      --primary-dark: #005005;
+      --secondary-color: #f5f5f5;
+      --text-color: #333;
+      --light-text: #f5f5f5;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f9f9f9; color: var(--text-color); line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    header { background: var(--primary-color); color: var(--light-text); padding: 20px 0; text-align:center; border-radius:8px 8px 0 0; box-shadow: var(--shadow); margin-bottom:30px; }
+    h1 { font-size: 2.25rem; }
+    .subtitle { font-size: 1.05rem; opacity:0.9; }
+    .main-content { display:flex; gap:30px; flex-wrap:wrap; }
+    .form-section, .result-section { flex:1; min-width:300px; background:white; padding:25px; border-radius:8px; box-shadow:var(--shadow); }
+    .result-section { max-height:80vh; overflow:auto; }
+    h2 { color:var(--primary-color); margin-bottom: 18px; padding-bottom: 8px; border-bottom:2px solid var(--primary-light); }
+    .form-group { margin-bottom:18px; position:relative; }
+    label { display:block; margin-bottom:8px; font-weight:600; color:var(--primary-dark); }
+    input[type="text"], input[type="url"], input[type="date"], select { width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:4px; font-size:15px; }
+    input:focus, select:focus { outline:none; box-shadow:0 0 0 2px rgba(46,125,50,0.12); border-color:var(--primary-color); }
+    button { background:var(--primary-color); color:white; border:none; padding:11px 14px; border-radius:6px; cursor:pointer; font-weight:600; }
+    button:hover { background:var(--primary-dark); }
+    .copy-btn { background:var(--primary-light); color:white; padding:8px 12px; border-radius:6px; display:inline-block; margin-top:10px; }
+    .copy-btn:hover { background:var(--primary-dark); }
+    .citation-result { background:var(--secondary-color); padding:18px; border-radius:6px; margin-top:16px; border-left:4px solid var(--primary-color); word-wrap:break-word; }
+    .source-type-fields { display:none; }
+    .source-type-fields.active { display:block; animation:fadeIn .35s ease-in; }
+    @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+    .authors-container { margin-bottom:12px; }
+    .author-input { display:flex; gap:10px; margin-bottom:10px; }
+    .author-input input { flex:1; }
+    .add-author-btn { background:var(--primary-light); margin-bottom:8px; }
+    .remove-author-btn { background:#d32f2f; color:white; border-radius:6px; padding:6px 10px; }
+    .remove-author-btn:hover { background:#b71c1c; }
+    .fetch-btn { background:var(--primary-light); position:absolute; right:0; top:30px; padding:7px 10px; font-size:13px; border-radius:6px; }
+    .loading { display:inline-block; width:18px; height:18px; border:3px solid rgba(255,255,255,.3); border-radius:50%; border-top-color:#fff; animation: spin 1s linear infinite; margin-right:6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status-message { margin-top:6px; min-height:20px; font-size:0.95rem; }
+    .success { color:var(--primary-dark); }
+    .error { color:#d32f2f; }
+    .citation-history { margin-top:22px; }
+    .citation-item { background:white; padding:12px; border-radius:6px; margin-bottom:12px; box-shadow:var(--shadow); position:relative; }
+    .citation-item .copy-btn { position:absolute; top:12px; right:12px; }
+    .delete-btn { background:#d32f2f; position:absolute; top:12px; right:88px; padding:6px 10px; border-radius:6px; }
+    .delete-btn:hover { background:#b71c1c; }
+    .export-row { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+    .small-btn { padding:8px 12px; font-size:13px; width:auto; }
+    @media (max-width:768px) { .main-content { flex-direction:column; } .citation-item .copy-btn { position:static; display:inline-block; margin-right:8px; } .delete-btn { position:static; display:inline-block; } }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>IEEE Advanced Citation Generator</h1>
-            <p class="subtitle">Generate accurate IEEE citations with YRJ</p>
-        </div>
-    </header>
-
+  <header>
     <div class="container">
-        <div class="main-content">
-            <section class="form-section">
-                <h2>Citation Details</h2>
-                <div class="form-group">
-                    <label for="source-type">Source Type</label>
-                    <select id="source-type">
-                        <option value="website">Website</option>
-                        <option value="book">Book</option>
-                        <option value="journal">Journal Article</option>
-                        <option value="conference">Conference Paper</option>
-                        <option value="thesis">Thesis/Dissertation</option>
-                        <option value="report">Technical Report</option>
-                        <option value="patent">Patent</option>
-                        <option value="standard">Standard</option>
-                    </select>
-                </div>
-
-                <!-- Common fields for all source types -->
-                <div class="form-group">
-                    <label for="title">Title*</label>
-                    <input type="text" id="title" placeholder="Enter title of the work" required>
-                </div>
-
-                <div class="form-group authors-container">
-                    <label>Authors*</label>
-                    <div id="authors-list">
-                        <div class="author-input">
-                            <input type="text" class="author-name" placeholder="Last name, First name" required>
-                            <button type="button" class="remove-author-btn">×</button>
-                        </div>
-                    </div>
-                    <button type="button" id="add-author" class="add-author-btn">Add Another Author</button>
-                </div>
-
-                <div class="form-group">
-                    <label for="year">Publication Year*</label>
-                    <input type="text" id="year" placeholder="YYYY" required>
-                </div>
-
-                <!-- Website specific fields -->
-                <div id="website-fields" class="source-type-fields active">
-                    <div class="form-group">
-                        <label for="website-name">Website Name</label>
-                        <input type="text" id="website-name" placeholder="e.g., IEEE Xplore">
-                    </div>
-                    <div class="form-group">
-                        <label for="url">URL*</label>
-                        <input type="url" id="url" placeholder="https://example.com">
-                        <button type="button" id="fetch-website" class="fetch-btn">Fetch Data</button>
-                        <div id="website-status" class="status-message"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="access-date">Access Date</label>
-                        <input type="date" id="access-date">
-                    </div>
-                </div>
-
-                <!-- Book specific fields -->
-                <div id="book-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="publisher">Publisher*</label>
-                        <input type="text" id="publisher" placeholder="Publisher name">
-                    </div>
-                    <div class="form-group">
-                        <label for="edition">Edition</label>
-                        <input type="text" id="edition" placeholder="e.g., 2nd ed.">
-                    </div>
-                    <div class="form-group">
-                        <label for="isbn">ISBN</label>
-                        <input type="text" id="isbn" placeholder="ISBN number">
-                        <button type="button" id="fetch-book" class="fetch-btn">Fetch Data</button>
-                        <div id="book-status" class="status-message"></div>
-                    </div>
-                </div>
-
-                <!-- Journal specific fields -->
-                <div id="journal-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="journal-name">Journal Name*</label>
-                        <input type="text" id="journal-name" placeholder="Journal name">
-                    </div>
-                    <div class="form-group">
-                        <label for="volume">Volume</label>
-                        <input type="text" id="volume" placeholder="Volume number">
-                    </div>
-                    <div class="form-group">
-                        <label for="issue">Issue</label>
-                        <input type="text" id="issue" placeholder="Issue number">
-                    </div>
-                    <div class="form-group">
-                        <label for="page-range">Page Range*</label>
-                        <input type="text" id="page-range" placeholder="e.g., 123-130">
-                    </div>
-                    <div class="form-group">
-                        <label for="doi">DOI</label>
-                        <input type="text" id="doi" placeholder="DOI number">
-                        <button type="button" id="fetch-journal" class="fetch-btn">Fetch Data</button>
-                        <div id="journal-status" class="status-message"></div>
-                    </div>
-                </div>
-
-                <!-- Conference specific fields -->
-                <div id="conference-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="conference-name">Conference Name*</label>
-                        <input type="text" id="conference-name" placeholder="Conference name">
-                    </div>
-                    <div class="form-group">
-                        <label for="conference-location">Conference Location</label>
-                        <input type="text" id="conference-location" placeholder="City, Country">
-                    </div>
-                    <div class="form-group">
-                        <label for="conference-date">Conference Date</label>
-                        <input type="text" id="conference-date" placeholder="Month Day, Year">
-                    </div>
-                    <div class="form-group">
-                        <label for="conference-page-range">Page Range</label>
-                        <input type="text" id="conference-page-range" placeholder="e.g., 123-130">
-                    </div>
-                    <div class="form-group">
-                        <label for="conference-doi">DOI</label>
-                        <input type="text" id="conference-doi" placeholder="DOI number">
-                        <button type="button" id="fetch-conference" class="fetch-btn">Fetch Data</button>
-                        <div id="conference-status" class="status-message"></div>
-                    </div>
-                </div>
-
-                <!-- Thesis specific fields -->
-                <div id="thesis-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="thesis-type">Type*</label>
-                        <select id="thesis-type">
-                            <option value="PhD dissertation">PhD Dissertation</option>
-                            <option value="Master's thesis">Master's Thesis</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="institution">Institution*</label>
-                        <input type="text" id="institution" placeholder="University name">
-                    </div>
-                    <div class="form-group">
-                        <label for="thesis-location">Location</label>
-                        <input type="text" id="thesis-location" placeholder="City, Country">
-                    </div>
-                </div>
-
-                <!-- Report specific fields -->
-                <div id="report-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="report-number">Report Number</label>
-                        <input type="text" id="report-number" placeholder="Report number">
-                    </div>
-                    <div class="form-group">
-                        <label for="report-institution">Institution*</label>
-                        <input type="text" id="report-institution" placeholder="Institution name">
-                    </div>
-                    <div class="form-group">
-                        <label for="report-location">Location</label>
-                        <input type="text" id="report-location" placeholder="City, Country">
-                    </div>
-                </div>
-
-                <!-- Patent specific fields -->
-                <div id="patent-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="patent-number">Patent Number*</label>
-                        <input type="text" id="patent-number" placeholder="e.g., US 1234567 B1">
-                    </div>
-                    <div class="form-group">
-                        <label for="patent-date">Patent Date*</label>
-                        <input type="text" id="patent-date" placeholder="Month Day, Year">
-                    </div>
-                    <div class="form-group">
-                        <label for="assignee">Assignee</label>
-                        <input type="text" id="assignee" placeholder="Assignee name">
-                    </div>
-                </div>
-
-                <!-- Standard specific fields -->
-                <div id="standard-fields" class="source-type-fields">
-                    <div class="form-group">
-                        <label for="standard-number">Standard Number*</label>
-                        <input type="text" id="standard-number" placeholder="e.g., IEEE Std 802.11">
-                    </div>
-                    <div class="form-group">
-                        <label for="standard-title">Standard Title*</label>
-                        <input type="text" id="standard-title" placeholder="Standard title">
-                    </div>
-                    <div class="form-group">
-                        <label for="standard-publisher">Publisher*</label>
-                        <input type="text" id="standard-publisher" placeholder="Publisher name">
-                    </div>
-                    <div class="form-group">
-                        <label for="standard-date">Publication Date</label>
-                        <input type="text" id="standard-date" placeholder="Year">
-                    </div>
-                </div>
-
-                <button type="button" id="generate-btn">Generate Citation</button>
-            </section>
-
-            <section class="result-section">
-                <h2>Your IEEE Citation</h2>
-                <div id="current-citation" class="citation-result">
-                    <p>Your generated citation will appear here...</p>
-                </div>
-                <button type="button" id="copy-current-btn" class="copy-btn">Copy Citation</button>
-                
-                <div class="citation-history">
-                    <h3>Citation History</h3>
-                    <div id="citation-history">
-                        <!-- Generated citations will appear here -->
-                    </div>
-                </div>
-            </section>
-        </div>
+      <h1>IEEE Advanced Citation Generator</h1>
+      <p class="subtitle">Generate accurate IEEE citations with YRJ</p>
     </div>
+  </header>
 
-    <footer>
-        <div class="container">
-            <p>IEEE Advanced Citation Generator | For academic and research purposes</p>
-            <p>Developed by <a href="https://md-sanaul-haque-shanto.github.io/">Md Sanaul Haque Shanto</a></p>
-            <p>Organized by Youth Research Journal - Research Competition and Flagship Research Program for High School and University Students</p>
-            <p>Note: Always verify generated citations with your institution's style guide.</p>
+  <div class="container">
+    <div class="main-content">
+      <section class="form-section">
+        <h2>Citation Details</h2>
+
+        <div class="form-group">
+          <label for="source-type">Source Type</label>
+          <select id="source-type">
+            <option value="website">Website</option>
+            <option value="book">Book</option>
+            <option value="journal">Journal Article</option>
+            <option value="conference">Conference Paper</option>
+            <option value="thesis">Thesis/Dissertation</option>
+            <option value="report">Technical Report</option>
+            <option value="patent">Patent</option>
+            <option value="standard">Standard</option>
+          </select>
         </div>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Source type switcher
-            const sourceTypeSelect = document.getElementById('source-type');
-            const allSourceFields = document.querySelectorAll('.source-type-fields');
-            
-            sourceTypeSelect.addEventListener('change', function() {
-                // Hide all source type fields
-                allSourceFields.forEach(field => {
-                    field.classList.remove('active');
-                });
-                
-                // Show the selected source type fields
-                const selectedType = this.value;
-                document.getElementById(`${selectedType}-fields`).classList.add('active');
-            });
+        <div class="form-group">
+          <label for="title">Title*</label>
+          <input id="title" type="text" placeholder="Enter title of the work" required />
+        </div>
 
-            // Author management
-            const authorsList = document.getElementById('authors-list');
-            const addAuthorBtn = document.getElementById('add-author');
-            
-            addAuthorBtn.addEventListener('click', function() {
-                const authorDiv = document.createElement('div');
-                authorDiv.className = 'author-input';
-                authorDiv.innerHTML = `
-                    <input type="text" class="author-name" placeholder="Last name, First name" required>
-                    <button type="button" class="remove-author-btn">×</button>
-                `;
-                authorsList.appendChild(authorDiv);
-                
-                // Add event listener to the new remove button
-                authorDiv.querySelector('.remove-author-btn').addEventListener('click', function() {
-                    if (authorsList.children.length > 1) {
-                        authorsList.removeChild(authorDiv);
-                    } else {
-                        alert('You need at least one author.');
-                    }
-                });
-            });
+        <div class="form-group authors-container">
+          <label>Authors*</label>
+          <div id="authors-list">
+            <div class="author-input">
+              <input type="text" class="author-name" placeholder="Last name, First name" required />
+              <button type="button" class="remove-author-btn">×</button>
+            </div>
+          </div>
+          <button id="add-author" type="button" class="add-author-btn">Add Another Author</button>
+        </div>
 
-            // Add event listener to initial remove button
-            document.querySelector('.remove-author-btn').addEventListener('click', function() {
-                if (authorsList.children.length > 1) {
-                    authorsList.removeChild(this.parentElement);
-                } else {
-                    alert('You need at least one author.');
-                }
-            });
+        <div class="form-group">
+          <label for="year">Publication Year*</label>
+          <input id="year" type="text" placeholder="YYYY" required />
+        </div>
 
-            // Generate citation
-            const generateBtn = document.getElementById('generate-btn');
-            const currentCitationResult = document.getElementById('current-citation');
-            const citationHistory = document.getElementById('citation-history');
-            
-            generateBtn.addEventListener('click', function() {
-                // Validate required fields
-                if (!validateFields()) {
-                    return;
-                }
-                
-                const sourceType = sourceTypeSelect.value;
-                let citation;
-                
-                switch (sourceType) {
-                    case 'website':
-                        citation = generateWebsiteCitation();
-                        break;
-                    case 'book':
-                        citation = generateBookCitation();
-                        break;
-                    case 'journal':
-                        citation = generateJournalCitation();
-                        break;
-                    case 'conference':
-                        citation = generateConferenceCitation();
-                        break;
-                    case 'thesis':
-                        citation = generateThesisCitation();
-                        break;
-                    case 'report':
-                        citation = generateReportCitation();
-                        break;
-                    case 'patent':
-                        citation = generatePatentCitation();
-                        break;
-                    case 'standard':
-                        citation = generateStandardCitation();
-                        break;
-                    default:
-                        citation = "Citation type not supported.";
-                }
-                
-                // Display current citation
-                currentCitationResult.innerHTML = `<p>${citation}</p>`;
-                
-                // Add to history
-                addToHistory(citation);
-            });
+        <!-- Website -->
+        <div id="website-fields" class="source-type-fields active">
+          <div class="form-group">
+            <label for="website-name">Website Name</label>
+            <input id="website-name" type="text" placeholder="e.g., IEEE Xplore" />
+          </div>
+          <div class="form-group">
+            <label for="url">URL*</label>
+            <input id="url" type="url" placeholder="https://example.com" />
+            <button id="fetch-website" type="button" class="fetch-btn">Fetch Data</button>
+            <div id="website-status" class="status-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="access-date">Access Date</label>
+            <input id="access-date" type="date" />
+          </div>
+        </div>
 
-            // Copy current citation
-            const copyCurrentBtn = document.getElementById('copy-current-btn');
-            
-            copyCurrentBtn.addEventListener('click', function() {
-                const citationText = currentCitationResult.textContent;
-                copyToClipboard(citationText, copyCurrentBtn);
-            });
+        <!-- Book -->
+        <div id="book-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="publisher">Publisher*</label>
+            <input id="publisher" type="text" placeholder="Publisher name" />
+          </div>
+          <div class="form-group">
+            <label for="edition">Edition</label>
+            <input id="edition" type="text" placeholder="e.g., 2nd ed." />
+          </div>
+          <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input id="isbn" type="text" placeholder="ISBN number" />
+            <button id="fetch-book" type="button" class="fetch-btn">Fetch Data</button>
+            <div id="book-status" class="status-message"></div>
+          </div>
+        </div>
 
-            // Function to add citation to history
-            function addToHistory(citation) {
-                const citationId = Date.now();
-                const citationItem = document.createElement('div');
-                citationItem.className = 'citation-item';
-                citationItem.innerHTML = `
-                    <p>${citation}</p>
-                    <button type="button" class="copy-btn" data-id="${citationId}">Copy</button>
-                    <button type="button" class="delete-btn" data-id="${citationId}">Delete</button>
-                `;
-                citationHistory.prepend(citationItem);
-                
-                // Add event listeners to the new buttons
-                citationItem.querySelector('.copy-btn').addEventListener('click', function() {
-                    const text = this.parentElement.querySelector('p').textContent;
-                    copyToClipboard(text, this);
-                });
-                
-                citationItem.querySelector('.delete-btn').addEventListener('click', function() {
-                    citationItem.remove();
-                });
-            }
+        <!-- Journal -->
+        <div id="journal-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="journal-name">Journal Name*</label>
+            <input id="journal-name" type="text" placeholder="Journal name" />
+          </div>
+          <div class="form-group">
+            <label for="volume">Volume</label>
+            <input id="volume" type="text" placeholder="Volume number" />
+          </div>
+          <div class="form-group">
+            <label for="issue">Issue</label>
+            <input id="issue" type="text" placeholder="Issue number" />
+          </div>
+          <div class="form-group">
+            <label for="page-range">Page Range*</label>
+            <input id="page-range" type="text" placeholder="e.g., 123-130" />
+          </div>
+          <div class="form-group">
+            <label for="doi">DOI</label>
+            <input id="doi" type="text" placeholder="DOI number (e.g., 10.1234/abcd)" />
+            <button id="fetch-journal" type="button" class="fetch-btn">Fetch Data</button>
+            <div id="journal-status" class="status-message"></div>
+          </div>
+        </div>
 
-            // Function to copy text to clipboard
-            function copyToClipboard(text, button) {
-                navigator.clipboard.writeText(text).then(function() {
-                    const originalText = button.textContent;
-                    button.textContent = 'Copied!';
-                    
-                    setTimeout(function() {
-                        button.textContent = originalText;
-                    }, 2000);
-                }, function(err) {
-                    console.error('Could not copy text: ', err);
-                });
-            }
+        <!-- Conference -->
+        <div id="conference-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="conference-name">Conference Name*</label>
+            <input id="conference-name" type="text" placeholder="Conference name" />
+          </div>
+          <div class="form-group">
+            <label for="conference-location">Conference Location</label>
+            <input id="conference-location" type="text" placeholder="City, Country" />
+          </div>
+          <div class="form-group">
+            <label for="conference-date">Conference Date</label>
+            <input id="conference-date" type="text" placeholder="Month Day, Year" />
+          </div>
+          <div class="form-group">
+            <label for="conference-page-range">Page Range</label>
+            <input id="conference-page-range" type="text" placeholder="e.g., 123-130" />
+          </div>
+          <div class="form-group">
+            <label for="conference-doi">DOI</label>
+            <input id="conference-doi" type="text" placeholder="DOI number" />
+            <button id="fetch-conference" type="button" class="fetch-btn">Fetch Data</button>
+            <div id="conference-status" class="status-message"></div>
+          </div>
+        </div>
 
-            // Field validation
-            function validateFields() {
-                const title = document.getElementById('title').value.trim();
-                const authors = Array.from(document.querySelectorAll('.author-name')).map(a => a.value.trim()).filter(a => a);
-                const year = document.getElementById('year').value.trim();
-                
-                if (!title) {
-                    alert('Please enter the title.');
-                    return false;
-                }
-                
-                if (authors.length === 0 || authors.some(a => !a)) {
-                    alert('Please enter at least one author.');
-                    return false;
-                }
-                
-                if (!year) {
-                    alert('Please enter the publication year.');
-                    return false;
-                }
-                
-                // Source-specific validation
-                const sourceType = sourceTypeSelect.value;
-                
-                if (sourceType === 'website' && !document.getElementById('url').value.trim()) {
-                    alert('Please enter the URL for a website citation.');
-                    return false;
-                }
-                
-                if (sourceType === 'book' && !document.getElementById('publisher').value.trim()) {
-                    alert('Please enter the publisher for a book citation.');
-                    return false;
-                }
-                
-                if (sourceType === 'journal') {
-                    if (!document.getElementById('journal-name').value.trim()) {
-                        alert('Please enter the journal name.');
-                        return false;
-                    }
-                    if (!document.getElementById('page-range').value.trim()) {
-                        alert('Please enter the page range.');
-                        return false;
-                    }
-                }
-                
-                if (sourceType === 'conference' && !document.getElementById('conference-name').value.trim()) {
-                    alert('Please enter the conference name.');
-                    return false;
-                }
-                
-                if (sourceType === 'thesis' && !document.getElementById('institution').value.trim()) {
-                    alert('Please enter the institution for a thesis citation.');
-                    return false;
-                }
-                
-                if (sourceType === 'report' && !document.getElementById('report-institution').value.trim()) {
-                    alert('Please enter the institution for a report citation.');
-                    return false;
-                }
-                
-                if (sourceType === 'patent') {
-                    if (!document.getElementById('patent-number').value.trim()) {
-                        alert('Please enter the patent number.');
-                        return false;
-                    }
-                    if (!document.getElementById('patent-date').value.trim()) {
-                        alert('Please enter the patent date.');
-                        return false;
-                    }
-                }
-                
-                if (sourceType === 'standard') {
-                    if (!document.getElementById('standard-number').value.trim()) {
-                        alert('Please enter the standard number.');
-                        return false;
-                    }
-                    if (!document.getElementById('standard-title').value.trim()) {
-                        alert('Please enter the standard title.');
-                        return false;
-                    }
-                    if (!document.getElementById('standard-publisher').value.trim()) {
-                        alert('Please enter the publisher for a standard citation.');
-                        return false;
-                    }
-                }
-                
-                return true;
-            }
+        <!-- Thesis -->
+        <div id="thesis-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="thesis-type">Type*</label>
+            <select id="thesis-type"><option>PhD dissertation</option><option>Master's thesis</option></select>
+          </div>
+          <div class="form-group">
+            <label for="institution">Institution*</label>
+            <input id="institution" type="text" placeholder="University name" />
+          </div>
+          <div class="form-group">
+            <label for="thesis-location">Location</label>
+            <input id="thesis-location" type="text" placeholder="City, Country" />
+          </div>
+        </div>
 
-            // Citation generators
-            function generateWebsiteCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const websiteName = document.getElementById('website-name').value.trim();
-                const url = document.getElementById('url').value.trim();
-                const year = document.getElementById('year').value.trim();
-                
-                let accessDate = '';
-                const accessDateInput = document.getElementById('access-date').value;
-                if (accessDateInput) {
-                    const date = new Date(accessDateInput);
-                    accessDate = `Accessed: ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.`;
-                }
-                
-                let citation = `${authors}, "${title}," `;
-                if (websiteName) citation += `<em>${websiteName}</em>, `;
-                citation += year;
-                if (accessDate) citation += `. ${accessDate} `;
-                citation += `[Online]. Available: ${url}`;
-                
-                return citation;
-            }
+        <!-- Report -->
+        <div id="report-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="report-number">Report Number</label>
+            <input id="report-number" type="text" placeholder="Report number" />
+          </div>
+          <div class="form-group">
+            <label for="report-institution">Institution*</label>
+            <input id="report-institution" type="text" placeholder="Institution name" />
+          </div>
+          <div class="form-group">
+            <label for="report-location">Location</label>
+            <input id="report-location" type="text" placeholder="City, Country" />
+          </div>
+        </div>
 
-            function generateBookCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const publisher = document.getElementById('publisher').value.trim();
-                const year = document.getElementById('year').value.trim();
-                const edition = document.getElementById('edition').value.trim();
-                const isbn = document.getElementById('isbn').value.trim();
-                
-                let citation = `${authors}, <em>${title}</em>`;
-                if (edition) citation += `, ${edition}`;
-                citation += `. ${publisher}, ${year}`;
-                if (isbn) citation += `, ISBN: ${isbn}`;
-                
-                return citation;
-            }
+        <!-- Patent -->
+        <div id="patent-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="patent-number">Patent Number*</label>
+            <input id="patent-number" type="text" placeholder="e.g., US 1234567 B1" />
+          </div>
+          <div class="form-group">
+            <label for="patent-date">Patent Date*</label>
+            <input id="patent-date" type="text" placeholder="Month Day, Year" />
+          </div>
+          <div class="form-group">
+            <label for="assignee">Assignee</label>
+            <input id="assignee" type="text" placeholder="Assignee name" />
+          </div>
+        </div>
 
-            function generateJournalCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const journalName = document.getElementById('journal-name').value.trim();
-                const volume = document.getElementById('volume').value.trim();
-                const issue = document.getElementById('issue').value.trim();
-                const pageRange = document.getElementById('page-range').value.trim();
-                const year = document.getElementById('year').value.trim();
-                const doi = document.getElementById('doi').value.trim();
-                
-                let citation = `${authors}, "${title}," <em>${journalName}</em>`;
-                if (volume) citation += `, vol. ${volume}`;
-                if (issue) citation += `, no. ${issue}`;
-                citation += `, pp. ${pageRange}, ${year}`;
-                if (doi) citation += `, doi: ${doi}`;
-                
-                return citation;
-            }
+        <!-- Standard -->
+        <div id="standard-fields" class="source-type-fields">
+          <div class="form-group">
+            <label for="standard-number">Standard Number*</label>
+            <input id="standard-number" type="text" placeholder="e.g., IEEE Std 802.11" />
+          </div>
+          <div class="form-group">
+            <label for="standard-title">Standard Title*</label>
+            <input id="standard-title" type="text" placeholder="Standard title" />
+          </div>
+          <div class="form-group">
+            <label for="standard-publisher">Publisher*</label>
+            <input id="standard-publisher" type="text" placeholder="Publisher name" />
+          </div>
+          <div class="form-group">
+            <label for="standard-date">Publication Date</label>
+            <input id="standard-date" type="text" placeholder="Year" />
+          </div>
+        </div>
 
-            function generateConferenceCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const conferenceName = document.getElementById('conference-name').value.trim();
-                const conferenceLocation = document.getElementById('conference-location').value.trim();
-                const conferenceDate = document.getElementById('conference-date').value.trim();
-                const pageRange = document.getElementById('conference-page-range').value.trim();
-                const year = document.getElementById('year').value.trim();
-                const doi = document.getElementById('conference-doi').value.trim();
-                
-                let citation = `${authors}, "${title}," in <em>${conferenceName}</em>`;
-                if (conferenceLocation || conferenceDate) {
-                    citation += `, ${conferenceLocation}`;
-                    if (conferenceLocation && conferenceDate) citation += ', ';
-                    citation += conferenceDate;
-                }
-                if (pageRange) citation += `, pp. ${pageRange}`;
-                citation += `, ${year}`;
-                if (doi) citation += `, doi: ${doi}`;
-                else citation += '.';
-                
-                return citation;
-            }
+        <button id="generate-btn" type="button">Generate Citation</button>
+      </section>
 
-            function generateThesisCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const thesisType = document.getElementById('thesis-type').value;
-                const institution = document.getElementById('institution').value.trim();
-                const year = document.getElementById('year').value.trim();
-                const location = document.getElementById('thesis-location').value.trim();
-                
-                let citation = `${authors}, "${title}," ${thesisType}, ${institution}`;
-                if (location) citation += `, ${location}`;
-                citation += `, ${year}.`;
-                
-                return citation;
-            }
+      <section class="result-section">
+        <h2>Your IEEE Citation</h2>
 
-            function generateReportCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const reportNumber = document.getElementById('report-number').value.trim();
-                const institution = document.getElementById('report-institution').value.trim();
-                const year = document.getElementById('year').value.trim();
-                const location = document.getElementById('report-location').value.trim();
-                
-                let citation = `${authors}, "${title}," `;
-                if (reportNumber) citation += `${reportNumber}, `;
-                citation += institution;
-                if (location) citation += `, ${location}`;
-                citation += `, ${year}.`;
-                
-                return citation;
-            }
+        <div id="current-citation" class="citation-result"><p>Your generated citation will appear here...</p></div>
 
-            function generatePatentCitation() {
-                const authors = formatAuthors();
-                const title = document.getElementById('title').value.trim();
-                const patentNumber = document.getElementById('patent-number').value.trim();
-                const patentDate = document.getElementById('patent-date').value.trim();
-                const assignee = document.getElementById('assignee').value.trim();
-                const year = document.getElementById('year').value.trim();
-                
-                let citation = `${authors}, "${title}," `;
-                if (assignee) citation += `Assignee: ${assignee}, `;
-                citation += `${patentNumber}, ${patentDate}.`;
-                
-                return citation;
-            }
+        <div style="margin-top:10px;">
+          <button id="copy-current-btn" class="copy-btn small-btn" type="button">Copy Citation</button>
+          <div class="export-row" style="display:inline-block; vertical-align:middle; margin-left:12px;">
+            <button id="export-bib-btn" class="small-btn" type="button">Export .bib</button>
+            <button id="export-ris-btn" class="small-btn" type="button">Export .ris</button>
+          </div>
+        </div>
 
-            function generateStandardCitation() {
-                const authors = formatAuthors(true); // Sometimes standards have organizations as authors
-                const standardNumber = document.getElementById('standard-number').value.trim();
-                const standardTitle = document.getElementById('standard-title').value.trim();
-                const publisher = document.getElementById('standard-publisher').value.trim();
-                const standardDate = document.getElementById('standard-date').value.trim();
-                const year = document.getElementById('year').value.trim();
-                
-                let citation = `${standardNumber}, "${standardTitle}," `;
-                if (authors) citation += `${authors}, `;
-                citation += publisher;
-                if (standardDate) citation += `, ${standardDate}`;
-                else citation += `, ${year}`;
-                
-                return citation;
-            }
+        <div class="citation-history">
+          <h3 style="margin-top:18px;">Citation History</h3>
+          <div id="citation-history"></div>
+        </div>
+      </section>
+    </div>
+  </div>
 
-            function formatAuthors(forStandard = false) {
-                const authorInputs = document.querySelectorAll('.author-name');
-                const authors = Array.from(authorInputs)
-                    .map(input => input.value.trim())
-                    .filter(name => name);
-                
-                if (authors.length === 0) return '';
-                
-                if (forStandard && authors.length > 3) {
-                    return authors[0] + ' et al.';
-                }
-                
-                if (authors.length > 6) {
-                    return authors.slice(0, 6).join(', ') + ' et al.';
-                }
-                
-                return authors.join(', ');
-            }
+  <footer>
+    <div class="container" style="text-align:center; margin-top:20px;">
+      <p>IEEE Advanced Citation Generator | For academic and research purposes</p>
+      <p>Developed by <a href="https://md-sanaul-haque-shanto.github.io/">Md Sanaul Haque Shanto</a></p>
+      <p>Organized by Youth Research Journal - Research Competition and Flagship Research Program for High School and University Students</p>
+      <p>Note: Always verify generated citations with your institution's style guide.</p>
+    </div>
+  </footer>
 
-            // Automatic data fetching functions
-            document.getElementById('fetch-website').addEventListener('click', fetchWebsiteData);
-            document.getElementById('fetch-journal').addEventListener('click', fetchJournalData);
-            document.getElementById('fetch-conference').addEventListener('click', fetchConferenceData);
-            document.getElementById('fetch-book').addEventListener('click', fetchBookData);
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sourceTypeSelect = document.getElementById('source-type');
+      const allSourceFields = document.querySelectorAll('.source-type-fields');
 
-            async function fetchWebsiteData() {
-                const url = document.getElementById('url').value.trim();
-                const statusElement = document.getElementById('website-status');
-                
-                if (!url) {
-                    showStatus(statusElement, 'Please enter a URL first', 'error');
-                    return;
-                }
-                
-                showStatus(statusElement, 'Fetching data...', 'loading');
-                
-                try {
-                    // First try with the Wayback Machine API
-                    const waybackUrl = `https://archive.org/wayback/available?url=${encodeURIComponent(url)}`;
-                    const waybackResponse = await fetch(waybackUrl);
-                    const waybackData = await waybackResponse.json();
-                    
-                    if (waybackData.archived_snapshots && waybackData.archived_snapshots.closest) {
-                        const snapshotUrl = waybackData.archived_snapshots.closest.url;
-                        const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(snapshotUrl)}`);
-                        const data = await response.json();
-                        
-                        if (data.data) {
-                            updateWebsiteFields(data.data);
-                            showStatus(statusElement, 'Data fetched successfully!', 'success');
-                            return;
-                        }
-                    }
-                    
-                    // Fallback to direct URL
-                    const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
-                    const data = await response.json();
-                    
-                    if (data.data) {
-                        updateWebsiteFields(data.data);
-                        showStatus(statusElement, 'Data fetched successfully!', 'success');
-                    } else {
-                        showStatus(statusElement, 'Could not fetch data. Please enter manually.', 'error');
-                    }
-                } catch (error) {
-                    console.error('Error fetching website data:', error);
-                    showStatus(statusElement, 'Error fetching data. Please enter manually.', 'error');
-                }
-            }
+      sourceTypeSelect.addEventListener('change', () => {
+        allSourceFields.forEach(f => f.classList.remove('active'));
+        const el = document.getElementById(`${sourceTypeSelect.value}-fields`);
+        if (el) el.classList.add('active');
+      });
 
-            function updateWebsiteFields(data) {
-                if (data.title) document.getElementById('title').value = data.title;
-                if (data.publisher) document.getElementById('website-name').value = data.publisher;
-                if (data.author) {
-                    // Clear existing authors
-                    const authorsList = document.getElementById('authors-list');
-                    while (authorsList.children.length > 1) {
-                        authorsList.removeChild(authorsList.lastChild);
-                    }
-                    
-                    // Set the first author
-                    const firstAuthor = formatAuthorName(data.author);
-                    document.querySelector('.author-name').value = firstAuthor;
-                    
-                    // Add additional authors if available
-                    if (Array.isArray(data.author)) {
-                        data.author.slice(1).forEach(author => {
-                            const authorDiv = document.createElement('div');
-                            authorDiv.className = 'author-input';
-                            authorDiv.innerHTML = `
-                                <input type="text" class="author-name" placeholder="Last name, First name" value="${formatAuthorName(author)}" required>
-                                <button type="button" class="remove-author-btn">×</button>
-                            `;
-                            authorsList.appendChild(authorDiv);
-                        });
-                    }
-                }
-                if (data.date) {
-                    const date = new Date(data.date);
-                    if (!isNaN(date.getTime())) {
-                        document.getElementById('year').value = date.getFullYear();
-                    }
-                }
-            }
+      // Authors management
+      const authorsList = document.getElementById('authors-list');
+      const addAuthorBtn = document.getElementById('add-author');
 
-            async function fetchJournalData() {
-                const doi = document.getElementById('doi').value.trim();
-                const statusElement = document.getElementById('journal-status');
-                
-                if (!doi) {
-                    showStatus(statusElement, 'Please enter a DOI first', 'error');
-                    return;
-                }
-                
-                showStatus(statusElement, 'Fetching data...', 'loading');
-                
-                try {
-                    const response = await fetch(`https://doi.org/${encodeURIComponent(doi)}`, {
-                        headers: {
-                            'Accept': 'application/vnd.citationstyles.csl+json'
-                        }
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error('DOI not found');
-                    }
-                    
-                    const data = await response.json();
-                    updateJournalFields(data);
-                    showStatus(statusElement, 'Data fetched successfully!', 'success');
-                } catch (error) {
-                    console.error('Error fetching journal data:', error);
-                    showStatus(statusElement, 'Error fetching data. Please enter manually.', 'error');
-                }
-            }
-
-            function updateJournalFields(data) {
-                if (data.title) document.getElementById('title').value = data.title;
-                if (data.container-title) document.getElementById('journal-name').value = data.container-title;
-                if (data.volume) document.getElementById('volume').value = data.volume;
-                if (data.issue) document.getElementById('issue').value = data.issue;
-                if (data.page) document.getElementById('page-range').value = data.page;
-                if (data.issued && data.issued['date-parts'] && data.issued['date-parts'][0]) {
-                    document.getElementById('year').value = data.issued['date-parts'][0][0];
-                }
-                
-                if (data.author) {
-                    // Clear existing authors
-                    const authorsList = document.getElementById('authors-list');
-                    while (authorsList.children.length > 1) {
-                        authorsList.removeChild(authorsList.lastChild);
-                    }
-                    
-                    // Set the first author
-                    const firstAuthor = formatAuthorName(data.author[0]);
-                    document.querySelector('.author-name').value = firstAuthor;
-                    
-                    // Add additional authors if available
-                    data.author.slice(1).forEach(author => {
-                        const authorDiv = document.createElement('div');
-                        authorDiv.className = 'author-input';
-                        authorDiv.innerHTML = `
-                            <input type="text" class="author-name" placeholder="Last name, First name" value="${formatAuthorName(author)}" required>
-                            <button type="button" class="remove-author-btn">×</button>
-                        `;
-                        authorsList.appendChild(authorDiv);
-                    });
-                }
-            }
-
-            async function fetchConferenceData() {
-                const doi = document.getElementById('conference-doi').value.trim();
-                const statusElement = document.getElementById('conference-status');
-                
-                if (!doi) {
-                    showStatus(statusElement, 'Please enter a DOI first', 'error');
-                    return;
-                }
-                
-                showStatus(statusElement, 'Fetching data...', 'loading');
-                
-                try {
-                    const response = await fetch(`https://doi.org/${encodeURIComponent(doi)}`, {
-                        headers: {
-                            'Accept': 'application/vnd.citationstyles.csl+json'
-                        }
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error('DOI not found');
-                    }
-                    
-                    const data = await response.json();
-                    updateConferenceFields(data);
-                    showStatus(statusElement, 'Data fetched successfully!', 'success');
-                } catch (error) {
-                    console.error('Error fetching conference data:', error);
-                    showStatus(statusElement, 'Error fetching data. Please enter manually.', 'error');
-                }
-            }
-
-            function updateConferenceFields(data) {
-                if (data.title) document.getElementById('title').value = data.title;
-                if (data['event-title']) document.getElementById('conference-name').value = data['event-title'];
-                if (data.issued && data.issued['date-parts'] && data.issued['date-parts'][0]) {
-                    document.getElementById('year').value = data.issued['date-parts'][0][0];
-                }
-                if (data.page) document.getElementById('conference-page-range').value = data.page;
-                
-                if (data.author) {
-                    // Clear existing authors
-                    const authorsList = document.getElementById('authors-list');
-                    while (authorsList.children.length > 1) {
-                        authorsList.removeChild(authorsList.lastChild);
-                    }
-                    
-                    // Set the first author
-                    const firstAuthor = formatAuthorName(data.author[0]);
-                    document.querySelector('.author-name').value = firstAuthor;
-                    
-                    // Add additional authors if available
-                    data.author.slice(1).forEach(author => {
-                        const authorDiv = document.createElement('div');
-                        authorDiv.className = 'author-input';
-                        authorDiv.innerHTML = `
-                            <input type="text" class="author-name" placeholder="Last name, First name" value="${formatAuthorName(author)}" required>
-                            <button type="button" class="remove-author-btn">×</button>
-                        `;
-                        authorsList.appendChild(authorDiv);
-                    });
-                }
-            }
-
-            async function fetchBookData() {
-                const isbn = document.getElementById('isbn').value.trim();
-                const statusElement = document.getElementById('book-status');
-                
-                if (!isbn) {
-                    showStatus(statusElement, 'Please enter an ISBN first', 'error');
-                    return;
-                }
-                
-                showStatus(statusElement, 'Fetching data...', 'loading');
-                
-                try {
-                    // First try Open Library API
-                    const openLibraryResponse = await fetch(`https://openlibrary.org/isbn/${isbn}.json`);
-                    if (openLibraryResponse.ok) {
-                        const olData = await openLibraryResponse.json();
-                        const authors = await fetchBookAuthors(olData.authors);
-                        
-                        updateBookFields({
-                            title: olData.title,
-                            authors: authors,
-                            publishers: olData.publishers,
-                            publish_date: olData.publish_date
-                        });
-                        
-                        showStatus(statusElement, 'Data fetched successfully!', 'success');
-                        return;
-                    }
-                    
-                    // Fallback to Google Books API
-                    const googleResponse = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
-                    const googleData = await googleResponse.json();
-                    
-                    if (googleData.items && googleData.items.length > 0) {
-                        const bookInfo = googleData.items[0].volumeInfo;
-                        updateBookFields({
-                            title: bookInfo.title,
-                            authors: bookInfo.authors,
-                            publishers: bookInfo.publisher,
-                            publish_date: bookInfo.publishedDate,
-                            edition: bookInfo.edition
-                        });
-                        showStatus(statusElement, 'Data fetched successfully!', 'success');
-                    } else {
-                        showStatus(statusElement, 'Could not fetch data. Please enter manually.', 'error');
-                    }
-                } catch (error) {
-                    console.error('Error fetching book data:', error);
-                    showStatus(statusElement, 'Error fetching data. Please enter manually.', 'error');
-                }
-            }
-
-            async function fetchBookAuthors(authorLinks) {
-                if (!authorLinks || !Array.isArray(authorLinks)) return [];
-                
-                const authors = [];
-                for (const link of authorLinks) {
-                    try {
-                        const response = await fetch(`https://openlibrary.org${link.key}.json`);
-                        const data = await response.json();
-                        if (data.name) {
-                            authors.push(data.name);
-                        }
-                    } catch (error) {
-                        console.error('Error fetching author:', error);
-                    }
-                }
-                return authors;
-            }
-
-            function updateBookFields(data) {
-                if (data.title) document.getElementById('title').value = data.title;
-                if (data.publishers) document.getElementById('publisher').value = data.publishers.join(', ');
-                if (data.publish_date) {
-                    const yearMatch = data.publish_date.match(/\d{4}/);
-                    if (yearMatch) {
-                        document.getElementById('year').value = yearMatch[0];
-                    }
-                }
-                if (data.edition) document.getElementById('edition').value = data.edition;
-                
-                if (data.authors) {
-                    // Clear existing authors
-                    const authorsList = document.getElementById('authors-list');
-                    while (authorsList.children.length > 1) {
-                        authorsList.removeChild(authorsList.lastChild);
-                    }
-                    
-                    // Set the first author
-                    const firstAuthor = formatAuthorName(data.authors[0]);
-                    document.querySelector('.author-name').value = firstAuthor;
-                    
-                    // Add additional authors if available
-                    data.authors.slice(1).forEach(author => {
-                        const authorDiv = document.createElement('div');
-                        authorDiv.className = 'author-input';
-                        authorDiv.innerHTML = `
-                            <input type="text" class="author-name" placeholder="Last name, First name" value="${formatAuthorName(author)}" required>
-                            <button type="button" class="remove-author-btn">×</button>
-                        `;
-                        authorsList.appendChild(authorDiv);
-                    });
-                }
-            }
-
-            function formatAuthorName(author) {
-                if (!author) return '';
-                
-                // Handle CSL-JSON format
-                if (typeof author === 'object' && author.family && author.given) {
-                    return `${author.family}, ${author.given}`;
-                }
-                
-                // Handle string names
-                if (typeof author === 'string') {
-                    const parts = author.split(' ');
-                    if (parts.length > 1) {
-                        return `${parts[parts.length - 1]}, ${parts.slice(0, -1).join(' ')}`;
-                    }
-                    return author;
-                }
-                
-                return '';
-            }
-
-            function showStatus(element, message, type) {
-                element.innerHTML = '';
-                
-                if (type === 'loading') {
-                    const spinner = document.createElement('span');
-                    spinner.className = 'loading';
-                    element.appendChild(spinner);
-                }
-                
-                const text = document.createElement('span');
-                text.textContent = message;
-                text.className = type;
-                element.appendChild(text);
-                
-                // Clear status after 5 seconds
-                if (type !== 'loading') {
-                    setTimeout(() => {
-                        element.innerHTML = '';
-                    }, 5000);
-                }
-            }
+      function attachRemoveHandler(btn) {
+        btn.addEventListener('click', function () {
+          if (authorsList.children.length > 1) {
+            authorsList.removeChild(btn.parentElement);
+          } else {
+            alert('You need at least one author.');
+          }
         });
-    </script>
+      }
+
+      // initial remove
+      attachRemoveHandler(document.querySelector('.remove-author-btn'));
+
+      addAuthorBtn.addEventListener('click', () => {
+        const div = document.createElement('div');
+        div.className = 'author-input';
+        div.innerHTML = `<input type="text" class="author-name" placeholder="Last name, First name" required>
+                         <button type="button" class="remove-author-btn">×</button>`;
+        authorsList.appendChild(div);
+        attachRemoveHandler(div.querySelector('.remove-author-btn'));
+      });
+
+      // Generate, display, history
+      const generateBtn = document.getElementById('generate-btn');
+      const currentCitationResult = document.getElementById('current-citation');
+      const citationHistory = document.getElementById('citation-history');
+
+      generateBtn.addEventListener('click', () => {
+        if (!validateFields()) return;
+        const type = sourceTypeSelect.value;
+        let citationHtml = '';
+
+        switch (type) {
+          case 'website': citationHtml = generateWebsiteCitation(); break;
+          case 'book': citationHtml = generateBookCitation(); break;
+          case 'journal': citationHtml = generateJournalCitation(); break;
+          case 'conference': citationHtml = generateConferenceCitation(); break;
+          case 'thesis': citationHtml = generateThesisCitation(); break;
+          case 'report': citationHtml = generateReportCitation(); break;
+          case 'patent': citationHtml = generatePatentCitation(); break;
+          case 'standard': citationHtml = generateStandardCitation(); break;
+          default: citationHtml = 'Citation type not supported.';
+        }
+
+        currentCitationResult.innerHTML = `<p>${citationHtml}</p>`;
+        addToHistory(citationHtml);
+      });
+
+      function addToHistory(citationHtml) {
+        const item = document.createElement('div');
+        item.className = 'citation-item';
+        item.dataset.citationHtml = citationHtml;
+        item.innerHTML = `<p>${citationHtml}</p>
+                          <button type="button" class="copy-btn">Copy</button>
+                          <button type="button" class="delete-btn">Delete</button>`;
+        citationHistory.prepend(item);
+
+        item.querySelector('.copy-btn').addEventListener('click', function () {
+          copyHtmlToClipboard(item.dataset.citationHtml, this);
+        });
+        item.querySelector('.delete-btn').addEventListener('click', () => item.remove());
+      }
+
+      // Clipboard copy (preserve HTML if possible)
+      document.getElementById('copy-current-btn').addEventListener('click', function () {
+        const p = currentCitationResult.querySelector('p');
+        if (!p) return;
+        copyHtmlToClipboard(p.innerHTML, this);
+      });
+
+      async function copyHtmlToClipboard(html, button) {
+        const plain = stripHtml(html);
+        if (navigator.clipboard && navigator.clipboard.write) {
+          try {
+            const blobHtml = new Blob([html], { type: 'text/html' });
+            const blobPlain = new Blob([plain], { type: 'text/plain' });
+            const item = new ClipboardItem({ 'text/html': blobHtml, 'text/plain': blobPlain });
+            await navigator.clipboard.write([item]);
+            showCopySuccess(button);
+            return;
+          } catch (err) {
+            // fallback
+          }
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(plain);
+            showCopySuccess(button);
+            return;
+          } catch (err) { /* fallback */ }
+        }
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = plain;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showCopySuccess(button);
+        } catch (err) {
+          console.error('Copy failed', err);
+        }
+      }
+
+      function showCopySuccess(button) {
+        const orig = button.textContent;
+        button.textContent = 'Copied!';
+        setTimeout(() => { button.textContent = orig; }, 1700);
+      }
+
+      function stripHtml(html) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+      }
+
+      // Validation
+      function validateFields() {
+        const title = document.getElementById('title').value.trim();
+        const authorVals = Array.from(document.querySelectorAll('.author-name')).map(a => a.value.trim()).filter(Boolean);
+        const year = document.getElementById('year').value.trim();
+        if (!title) { alert('Please enter the title.'); return false; }
+        if (!authorVals.length) { alert('Please enter at least one author.'); return false; }
+        if (!year) { alert('Please enter the publication year.'); return false; }
+        const type = sourceTypeSelect.value;
+        if (type === 'website' && !document.getElementById('url').value.trim()) { alert('Please enter the URL for a website citation.'); return false; }
+        if (type === 'book' && !document.getElementById('publisher').value.trim()) { alert('Please enter the publisher for a book citation.'); return false; }
+        if (type === 'journal') {
+          if (!document.getElementById('journal-name').value.trim()) { alert('Please enter the journal name.'); return false; }
+          if (!document.getElementById('page-range').value.trim()) { alert('Please enter the page range.'); return false; }
+        }
+        if (type === 'conference' && !document.getElementById('conference-name').value.trim()) { alert('Please enter the conference name.'); return false; }
+        if (type === 'thesis' && !document.getElementById('institution').value.trim()) { alert('Please enter the institution for a thesis citation.'); return false; }
+        if (type === 'report' && !document.getElementById('report-institution').value.trim()) { alert('Please enter the institution for a report citation.'); return false; }
+        if (type === 'patent') {
+          if (!document.getElementById('patent-number').value.trim()) { alert('Please enter the patent number.'); return false; }
+          if (!document.getElementById('patent-date').value.trim()) { alert('Please enter the patent date.'); return false; }
+        }
+        if (type === 'standard') {
+          if (!document.getElementById('standard-number').value.trim()) { alert('Please enter the standard number.'); return false; }
+          if (!document.getElementById('standard-title').value.trim()) { alert('Please enter the standard title.'); return false; }
+          if (!document.getElementById('standard-publisher').value.trim()) { alert('Please enter the publisher for a standard citation.'); return false; }
+        }
+        return true;
+      }
+
+      // ---------- IEEE name formatting helpers ----------
+      function isOrganizationName(name) {
+        if (!name) return false;
+        const keywords = ['university', 'institute', 'laboratory', 'lab', 'inc', 'ltd', 'corp', 'company', 'association', 'society', 'committee', 'department', 'organisation', 'organization', 'ieee', 'w3c', 'who', 'world', 'federal'];
+        const lower = name.toLowerCase();
+        if (keywords.some(k => lower.includes(k))) return true;
+        // if name is long (likely org), treat as org to avoid initials
+        if (name.split(/\s+/).length >= 4) return true;
+        return false;
+      }
+
+      function toIEEEInitials(name) {
+        if (!name) return '';
+        name = name.trim();
+        if (isOrganizationName(name)) return name; // preserve full org name
+
+        // if name already in "Last, First" format
+        if (name.includes(',')) {
+          const parts = name.split(',');
+          const last = parts[0].trim();
+          const rest = parts[1].trim().split(/\s+/).filter(Boolean);
+          const initials = rest.map(p => initialFromPart(p)).join(' ');
+          return initials ? `${initials} ${last}` : last;
+        }
+
+        // if name is "First Middle Last"
+        const parts = name.split(/\s+/).filter(Boolean);
+        if (parts.length === 1) return parts[0];
+        const last = parts[parts.length - 1];
+        const rest = parts.slice(0, parts.length - 1);
+        const initials = rest.map(p => initialFromPart(p)).join(' ');
+        return initials ? `${initials} ${last}` : last;
+      }
+
+      function initialFromPart(part) {
+        if (!part) return '';
+        // if already an initial like "A." or "A", normalize to "A."
+        const letterMatch = part.match(/[A-Za-z]/);
+        if (!letterMatch) return '';
+        const first = letterMatch[0].toUpperCase();
+        return `${first}.`;
+      }
+
+      function toBibAuthorName(name) {
+        if (!name) return '';
+        name = name.trim();
+        if (isOrganizationName(name)) return name;
+        if (name.includes(',')) {
+          // assume "Last, First Middle"
+          return name;
+        }
+        const parts = name.split(/\s+/).filter(Boolean);
+        if (parts.length === 1) return parts[0];
+        const last = parts[parts.length - 1];
+        const rest = parts.slice(0, parts.length - 1).join(' ');
+        return `${last}, ${rest}`;
+      }
+
+      function toRisAuthorName(name) {
+        // RIS AU typically "Last, First" — we'll use same as Bib result but remove extra punctuation
+        return toBibAuthorName(name);
+      }
+
+      function formatAuthorsIEEE(forStandard=false) {
+        const inputs = Array.from(document.querySelectorAll('.author-name')).map(a => a.value.trim()).filter(Boolean);
+        if (!inputs.length) return '';
+        // for standards/organizations: if single organization present, return it
+        if (forStandard && inputs.length === 1 && isOrganizationName(inputs[0])) return inputs[0];
+
+        const ieeeNames = inputs.map(n => toIEEEInitials(n));
+        if (ieeeNames.length === 1) return ieeeNames[0];
+        if (ieeeNames.length === 2) return `${ieeeNames[0]} and ${ieeeNames[1]}`;
+        // three or more: comma separated, with 'and' before last
+        return ieeeNames.slice(0, -1).join(', ') + ', and ' + ieeeNames[ieeeNames.length - 1];
+      }
+
+      function getAuthorsForBib() {
+        const inputs = Array.from(document.querySelectorAll('.author-name')).map(a => a.value.trim()).filter(Boolean);
+        if (!inputs.length) return '';
+        return inputs.map(n => toBibAuthorName(n)).join(' and ');
+      }
+
+      function getAuthorsForRis() {
+        const inputs = Array.from(document.querySelectorAll('.author-name')).map(a => a.value.trim()).filter(Boolean);
+        if (!inputs.length) return [];
+        return inputs.map(n => toRisAuthorName(n));
+      }
+
+      // ---------- Citation generators (HTML with <em> preserved) ----------
+      function generateWebsiteCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const websiteName = document.getElementById('website-name').value.trim();
+        const url = document.getElementById('url').value.trim();
+        const year = document.getElementById('year').value.trim();
+        let accessDate = '';
+        const accessDateInput = document.getElementById('access-date').value;
+        if (accessDateInput) {
+          const d = new Date(accessDateInput);
+          accessDate = `Accessed: ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.`;
+        }
+        let c = `${authors}, "${escapeHtmlAttr(title)}," `;
+        if (websiteName) c += `<em>${escapeHtmlAttr(websiteName)}</em>, `;
+        c += `${year}`;
+        if (accessDate) c += `. ${accessDate} `;
+        c += `[Online]. Available: ${url}`;
+        return c;
+      }
+
+      function generateBookCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const publisher = document.getElementById('publisher').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const edition = document.getElementById('edition').value.trim();
+        const isbn = document.getElementById('isbn').value.trim();
+        let c = `${authors}, <em>${escapeHtmlAttr(title)}</em>`;
+        if (edition) c += `, ${escapeHtmlAttr(edition)}`;
+        c += `. ${escapeHtmlAttr(publisher)}, ${year}`;
+        if (isbn) c += `, ISBN: ${escapeHtmlAttr(isbn)}`;
+        return c;
+      }
+
+      function generateJournalCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const journalName = document.getElementById('journal-name').value.trim();
+        const volume = document.getElementById('volume').value.trim();
+        const issue = document.getElementById('issue').value.trim();
+        const pageRange = document.getElementById('page-range').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const doi = document.getElementById('doi').value.trim();
+        let c = `${authors}, "${escapeHtmlAttr(title)}," <em>${escapeHtmlAttr(journalName)}</em>`;
+        if (volume) c += `, vol. ${escapeHtmlAttr(volume)}`;
+        if (issue) c += `, no. ${escapeHtmlAttr(issue)}`;
+        c += `, pp. ${escapeHtmlAttr(pageRange)}, ${escapeHtmlAttr(year)}`;
+        if (doi) c += `, doi: ${escapeHtmlAttr(doi)}`;
+        return c;
+      }
+
+      function generateConferenceCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const conferenceName = document.getElementById('conference-name').value.trim();
+        const conferenceLocation = document.getElementById('conference-location').value.trim();
+        const conferenceDate = document.getElementById('conference-date').value.trim();
+        const pageRange = document.getElementById('conference-page-range').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const doi = document.getElementById('conference-doi').value.trim();
+        let c = `${authors}, "${escapeHtmlAttr(title)}," in <em>${escapeHtmlAttr(conferenceName)}</em>`;
+        if (conferenceLocation || conferenceDate) {
+          c += `, ${escapeHtmlAttr(conferenceLocation)}`;
+          if (conferenceLocation && conferenceDate) c += ', ';
+          c += escapeHtmlAttr(conferenceDate);
+        }
+        if (pageRange) c += `, pp. ${escapeHtmlAttr(pageRange)}`;
+        c += `, ${escapeHtmlAttr(year)}`;
+        if (doi) c += `, doi: ${escapeHtmlAttr(doi)}`; else c += '.';
+        return c;
+      }
+
+      function generateThesisCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const thesisType = document.getElementById('thesis-type').value;
+        const institution = document.getElementById('institution').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const location = document.getElementById('thesis-location').value.trim();
+        let c = `${authors}, "${escapeHtmlAttr(title)}," ${escapeHtmlAttr(thesisType)}, ${escapeHtmlAttr(institution)}`;
+        if (location) c += `, ${escapeHtmlAttr(location)}`;
+        c += `, ${escapeHtmlAttr(year)}.`;
+        return c;
+      }
+
+      function generateReportCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const reportNumber = document.getElementById('report-number').value.trim();
+        const institution = document.getElementById('report-institution').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const location = document.getElementById('report-location').value.trim();
+        let c = `${authors}, "${escapeHtmlAttr(title)}," `;
+        if (reportNumber) c += `${escapeHtmlAttr(reportNumber)}, `;
+        c += escapeHtmlAttr(institution);
+        if (location) c += `, ${escapeHtmlAttr(location)}`;
+        c += `, ${escapeHtmlAttr(year)}.`;
+        return c;
+      }
+
+      function generatePatentCitation() {
+        const authors = formatAuthorsIEEE();
+        const title = document.getElementById('title').value.trim();
+        const patentNumber = document.getElementById('patent-number').value.trim();
+        const patentDate = document.getElementById('patent-date').value.trim();
+        const assignee = document.getElementById('assignee').value.trim();
+        let c = `${authors}, "${escapeHtmlAttr(title)}," `;
+        if (assignee) c += `Assignee: ${escapeHtmlAttr(assignee)}, `;
+        c += `${escapeHtmlAttr(patentNumber)}, ${escapeHtmlAttr(patentDate)}.`;
+        return c;
+      }
+
+      function generateStandardCitation() {
+        const authors = formatAuthorsIEEE(true);
+        const standardNumber = document.getElementById('standard-number').value.trim();
+        const standardTitle = document.getElementById('standard-title').value.trim();
+        const publisher = document.getElementById('standard-publisher').value.trim();
+        const standardDate = document.getElementById('standard-date').value.trim();
+        const year = document.getElementById('year').value.trim();
+        let c = `${escapeHtmlAttr(standardNumber)}, "${escapeHtmlAttr(standardTitle)}," `;
+        if (authors) c += `${authors}, `;
+        c += escapeHtmlAttr(publisher);
+        if (standardDate) c += `, ${escapeHtmlAttr(standardDate)}`; else c += `, ${escapeHtmlAttr(year)}`;
+        return c;
+      }
+
+      function escapeHtmlAttr(s) {
+        if (!s) return '';
+        return s.replace(/&/g, '&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      // ---------- Fetch helpers (unchanged but robust) ----------
+      document.getElementById('fetch-website').addEventListener('click', fetchWebsiteData);
+      document.getElementById('fetch-journal').addEventListener('click', fetchJournalData);
+      document.getElementById('fetch-conference').addEventListener('click', fetchConferenceData);
+      document.getElementById('fetch-book').addEventListener('click', fetchBookData);
+
+      async function fetchWebsiteData() {
+        const url = document.getElementById('url').value.trim();
+        const status = document.getElementById('website-status');
+        if (!url) { showStatus(status, 'Please enter a URL first', 'error'); return; }
+        showStatus(status, 'Fetching data...', 'loading');
+        try {
+          const mic = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
+          if (mic.ok) {
+            const j = await mic.json();
+            if (j && j.data) { updateWebsiteFields(j.data); showStatus(status, 'Data fetched successfully!', 'success'); return; }
+          }
+          const way = await fetch(`https://archive.org/wayback/available?url=${encodeURIComponent(url)}`);
+          const wd = await way.json();
+          if (wd.archived_snapshots && wd.archived_snapshots.closest) {
+            const snap = wd.archived_snapshots.closest.url;
+            const resp = await fetch(`https://api.microlink.io?url=${encodeURIComponent(snap)}`);
+            const d = await resp.json();
+            if (d && d.data) { updateWebsiteFields(d.data); showStatus(status, 'Data fetched successfully!', 'success'); return; }
+          }
+          showStatus(status, 'Could not fetch data. Please enter manually.', 'error');
+        } catch (err) { console.error(err); showStatus(status, 'Error fetching data. Please enter manually.', 'error'); }
+      }
+
+      function updateWebsiteFields(data) {
+        if (data.title) document.getElementById('title').value = data.title;
+        if (data.publisher) document.getElementById('website-name').value = data.publisher;
+        if (data.site && data.site.name) document.getElementById('website-name').value = data.site.name;
+        if (data.author) {
+          while (authorsList.children.length > 1) authorsList.removeChild(authorsList.lastChild);
+          if (Array.isArray(data.author)) {
+            document.querySelector('.author-name').value = formatAuthorNameFromAny(data.author[0]);
+            data.author.slice(1).forEach(a => appendAuthorRow(formatAuthorNameFromAny(a)));
+          } else {
+            document.querySelector('.author-name').value = formatAuthorNameFromAny(data.author);
+          }
+        }
+        if (data.date) {
+          const d = new Date(data.date);
+          if (!isNaN(d.getTime())) document.getElementById('year').value = d.getFullYear();
+        }
+      }
+
+      async function fetchJournalData() {
+        const doi = document.getElementById('doi').value.trim();
+        const status = document.getElementById('journal-status');
+        if (!doi) { showStatus(status, 'Please enter a DOI first', 'error'); return; }
+        showStatus(status, 'Fetching data...', 'loading');
+        let norm = doi;
+        if (norm.startsWith('http')) {
+          try { norm = new URL(norm).pathname.replace(/^\/+/, ''); } catch(e) {}
+        }
+        try {
+          const res = await fetch(`https://doi.org/${encodeURIComponent(norm)}`, { headers: { 'Accept': 'application/vnd.citationstyles.csl+json' }});
+          if (!res.ok) throw new Error('DOI not found');
+          const data = await res.json();
+          updateJournalFields(data);
+          showStatus(status, 'Data fetched successfully!', 'success');
+        } catch (err) { console.error(err); showStatus(status, 'Error fetching data. Please enter manually.', 'error'); }
+      }
+
+      function updateJournalFields(data) {
+        if (data.title) document.getElementById('title').value = data.title;
+        const container = data['container-title'] || data['container-title-short'] || data['journal-title'] || data['publication-title'];
+        if (container) document.getElementById('journal-name').value = Array.isArray(container) ? container[0] : container;
+        if (data.volume) document.getElementById('volume').value = data.volume;
+        if (data.issue) document.getElementById('issue').value = data.issue;
+        if (data.page) document.getElementById('page-range').value = data.page;
+        if (data.issued && data.issued['date-parts'] && data.issued['date-parts'][0]) document.getElementById('year').value = data.issued['date-parts'][0][0];
+        if (data.author) {
+          while (authorsList.children.length > 1) authorsList.removeChild(authorsList.lastChild);
+          document.querySelector('.author-name').value = formatAuthorNameFromAny(data.author[0]);
+          data.author.slice(1).forEach(a => appendAuthorRow(formatAuthorNameFromAny(a)));
+        }
+      }
+
+      async function fetchConferenceData() {
+        const doi = document.getElementById('conference-doi').value.trim();
+        const status = document.getElementById('conference-status');
+        if (!doi) { showStatus(status, 'Please enter a DOI first', 'error'); return; }
+        showStatus(status, 'Fetching data...', 'loading');
+        try {
+          const res = await fetch(`https://doi.org/${encodeURIComponent(doi)}`, { headers: { 'Accept': 'application/vnd.citationstyles.csl+json' }});
+          if (!res.ok) throw new Error('DOI not found');
+          const data = await res.json();
+          updateConferenceFields(data);
+          showStatus(status, 'Data fetched successfully!', 'success');
+        } catch (err) { console.error(err); showStatus(status, 'Error fetching data. Please enter manually.', 'error'); }
+      }
+
+      function updateConferenceFields(data) {
+        if (data.title) document.getElementById('title').value = data.title;
+        const eventTitle = data['event-title'] || data['container-title'] || data['event'] || data['collection-title'];
+        if (eventTitle) document.getElementById('conference-name').value = Array.isArray(eventTitle) ? eventTitle[0] : eventTitle;
+        if (data.issued && data.issued['date-parts'] && data.issued['date-parts'][0]) document.getElementById('year').value = data.issued['date-parts'][0][0];
+        if (data.page) document.getElementById('conference-page-range').value = data.page;
+        if (data.author) {
+          while (authorsList.children.length > 1) authorsList.removeChild(authorsList.lastChild);
+          document.querySelector('.author-name').value = formatAuthorNameFromAny(data.author[0]);
+          data.author.slice(1).forEach(a => appendAuthorRow(formatAuthorNameFromAny(a)));
+        }
+      }
+
+      async function fetchBookData() {
+        const isbn = document.getElementById('isbn').value.trim();
+        const status = document.getElementById('book-status');
+        if (!isbn) { showStatus(status, 'Please enter an ISBN first', 'error'); return; }
+        showStatus(status, 'Fetching data...', 'loading');
+        try {
+          const ol = await fetch(`https://openlibrary.org/isbn/${isbn}.json`);
+          if (ol.ok) {
+            const olData = await ol.json();
+            const authors = await fetchBookAuthors(olData.authors);
+            updateBookFields({ title: olData.title, authors: authors, publishers: olData.publishers, publish_date: olData.publish_date });
+            showStatus(status, 'Data fetched successfully!', 'success'); return;
+          }
+          const g = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+          const gd = await g.json();
+          if (gd.items && gd.items.length) {
+            const info = gd.items[0].volumeInfo;
+            updateBookFields({ title: info.title, authors: info.authors, publishers: info.publisher ? [info.publisher] : [], publish_date: info.publishedDate, edition: info.edition });
+            showStatus(status, 'Data fetched successfully!', 'success'); return;
+          }
+          showStatus(status, 'Could not fetch data. Please enter manually.', 'error');
+        } catch (err) { console.error(err); showStatus(status, 'Error fetching data. Please enter manually.', 'error'); }
+      }
+
+      async function fetchBookAuthors(arr) {
+        if (!arr || !Array.isArray(arr)) return arr || [];
+        const result = [];
+        for (const link of arr) {
+          try {
+            if (typeof link === 'string') result.push(link);
+            else if (link.key) {
+              const r = await fetch(`https://openlibrary.org${link.key}.json`);
+              const d = await r.json();
+              if (d.name) result.push(d.name);
+            }
+          } catch (e) { console.error(e); }
+        }
+        return result;
+      }
+
+      function updateBookFields(data) {
+        if (data.title) document.getElementById('title').value = data.title;
+        if (data.publishers) document.getElementById('publisher').value = Array.isArray(data.publishers) ? data.publishers.join(', ') : data.publishers;
+        if (data.publish_date) {
+          const ym = (data.publish_date + '').match(/\d{4}/);
+          if (ym) document.getElementById('year').value = ym[0];
+        }
+        if (data.edition) document.getElementById('edition').value = data.edition;
+        if (data.authors) {
+          while (authorsList.children.length > 1) authorsList.removeChild(authorsList.lastChild);
+          document.querySelector('.author-name').value = formatAuthorNameFromAny(data.authors[0]);
+          data.authors.slice(1).forEach(a => appendAuthorRow(formatAuthorNameFromAny(a)));
+        }
+      }
+
+      function formatAuthorNameFromAny(author) {
+        // Accept CSL author object, openlibrary string, or plain string
+        if (!author) return '';
+        if (typeof author === 'object') {
+          if (author.family && author.given) return `${author.family}, ${author.given}`;
+          if (author.name) return author.name;
+          if (author.fullname) return author.fullname;
+        }
+        return ('' + author).trim();
+      }
+
+      function appendAuthorRow(value = '') {
+        const div = document.createElement('div');
+        div.className = 'author-input';
+        div.innerHTML = `<input type="text" class="author-name" placeholder="Last name, First name" value="${escapeForInput(value)}" required>
+                         <button type="button" class="remove-author-btn">×</button>`;
+        authorsList.appendChild(div);
+        attachRemoveHandler(div.querySelector('.remove-author-btn'));
+      }
+
+      function escapeForInput(v) {
+        if (!v) return '';
+        return v.replace(/"/g, '&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      function showStatus(el, msg, type) {
+        el.innerHTML = '';
+        if (type === 'loading') {
+          const s = document.createElement('span');
+          s.className = 'loading';
+          el.appendChild(s);
+        }
+        const sp = document.createElement('span');
+        sp.textContent = msg;
+        sp.className = type;
+        el.appendChild(sp);
+        if (type !== 'loading') setTimeout(() => { el.innerHTML = ''; }, 5000);
+      }
+
+      // ---------- Exports: BibTeX and RIS ----------
+      document.getElementById('export-bib-btn').addEventListener('click', exportBib);
+      document.getElementById('export-ris-btn').addEventListener('click', exportRis);
+
+      function exportBib() {
+        if (!validateFields()) return;
+        const type = sourceTypeSelect.value;
+        const year = document.getElementById('year').value.trim();
+        const authorsBib = getAuthorsForBib() || 'Unknown';
+        const key = makeBibKey(authorsBib, year);
+
+        let bib = '';
+        if (type === 'journal') {
+          bib = `@article{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  journal = {${escapeBib(document.getElementById('journal-name').value.trim())}},
+  year = {${escapeBib(year)}},
+  pages = {${escapeBib(document.getElementById('page-range').value.trim())}}` +
+            (document.getElementById('volume').value.trim() ? `,\n  volume = {${escapeBib(document.getElementById('volume').value.trim())}}` : '') +
+            (document.getElementById('issue').value.trim() ? `,\n  number = {${escapeBib(document.getElementById('issue').value.trim())}}` : '') +
+            (document.getElementById('doi').value.trim() ? `,\n  doi = {${escapeBib(document.getElementById('doi').value.trim())}}` : '') +
+            `\n}`;
+        } else if (type === 'book') {
+          bib = `@book{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  publisher = {${escapeBib(document.getElementById('publisher').value.trim())}},
+  year = {${escapeBib(year)}}` +
+            (document.getElementById('edition').value.trim() ? `,\n  edition = {${escapeBib(document.getElementById('edition').value.trim())}}` : '') +
+            (document.getElementById('isbn').value.trim() ? `,\n  isbn = {${escapeBib(document.getElementById('isbn').value.trim())}}` : '') +
+            `\n}`;
+        } else if (type === 'conference') {
+          bib = `@inproceedings{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  booktitle = {${escapeBib(document.getElementById('conference-name').value.trim())}},
+  year = {${escapeBib(year)}}` +
+            (document.getElementById('conference-page-range').value.trim() ? `,\n  pages = {${escapeBib(document.getElementById('conference-page-range').value.trim())}}` : '') +
+            (document.getElementById('conference-doi').value.trim() ? `,\n  doi = {${escapeBib(document.getElementById('conference-doi').value.trim())}}` : '') +
+            `\n}`;
+        } else if (type === 'thesis') {
+          const thesisType = document.getElementById('thesis-type').value.includes('PhD') ? 'phdthesis' : 'mastersthesis';
+          bib = `@${thesisType}{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  school = {${escapeBib(document.getElementById('institution').value.trim())}},
+  year = {${escapeBib(year)}}\n}`;
+        } else if (type === 'report') {
+          bib = `@techreport{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  institution = {${escapeBib(document.getElementById('report-institution').value.trim())}},
+  year = {${escapeBib(year)}}` +
+            (document.getElementById('report-number').value.trim() ? `,\n  number = {${escapeBib(document.getElementById('report-number').value.trim())}}` : '') +
+            `\n}`;
+        } else if (type === 'patent') {
+          bib = `@misc{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  howpublished = {Patent ${escapeBib(document.getElementById('patent-number').value.trim())}},
+  year = {${escapeBib(year)}}\n}`;
+        } else if (type === 'standard') {
+          bib = `@misc{${key},
+  title = {${escapeBib(document.getElementById('standard-title').value.trim())}},
+  howpublished = {${escapeBib(document.getElementById('standard-number').value.trim())}},
+  publisher = {${escapeBib(document.getElementById('standard-publisher').value.trim())}},
+  year = {${escapeBib(year)}}\n}`;
+        } else { // website or fallback
+          bib = `@misc{${key},
+  author = {${authorsBib}},
+  title = {${escapeBib(document.getElementById('title').value.trim())}},
+  howpublished = {Online},
+  year = {${escapeBib(year)}},
+  note = {Accessed: ${escapeBib(formatAccessDate())}},
+  url = {${escapeBib(document.getElementById('url').value.trim())}}
+}`;
+        }
+
+        downloadFile(`${key}.bib`, bib, 'text/plain;charset=utf-8');
+      }
+
+      function exportRis() {
+        if (!validateFields()) return;
+        const type = sourceTypeSelect.value;
+        const authors = getAuthorsForRis(); // array
+        const year = document.getElementById('year').value.trim();
+        const lines = [];
+        const risType = (type === 'journal') ? 'JOUR' :
+                        (type === 'book') ? 'BOOK' :
+                        (type === 'conference') ? 'CONF' :
+                        (type === 'thesis') ? 'THES' :
+                        (type === 'report') ? 'RPRT' :
+                        (type === 'patent') ? 'PAT' :
+                        (type === 'website') ? 'ELEC' : 'GEN';
+
+        lines.push(`TY  - ${risType}`);
+        authors.forEach(a => lines.push(`AU  - ${a}`));
+        lines.push(`TI  - ${document.getElementById('title').value.trim()}`);
+        if (type === 'journal') {
+          lines.push(`JO  - ${document.getElementById('journal-name').value.trim()}`);
+          if (document.getElementById('volume').value.trim()) lines.push(`VL  - ${document.getElementById('volume').value.trim()}`);
+          if (document.getElementById('issue').value.trim()) lines.push(`IS  - ${document.getElementById('issue').value.trim()}`);
+          if (document.getElementById('page-range').value.trim()) {
+            const pr = document.getElementById('page-range').value.trim().split('-');
+            lines.push(`SP  - ${pr[0] || ''}`);
+            if (pr[1]) lines.push(`EP  - ${pr[1]}`);
+          }
+          if (document.getElementById('doi').value.trim()) lines.push(`DO  - ${document.getElementById('doi').value.trim()}`);
+        } else if (type === 'book') {
+          lines.push(`PB  - ${document.getElementById('publisher').value.trim()}`);
+        } else if (type === 'conference') {
+          lines.push(`BT  - ${document.getElementById('conference-name').value.trim()}`);
+          if (document.getElementById('conference-page-range').value.trim()) {
+            const pr = document.getElementById('conference-page-range').value.trim().split('-');
+            lines.push(`SP  - ${pr[0] || ''}`);
+            if (pr[1]) lines.push(`EP  - ${pr[1]}`);
+          }
+        } else if (type === 'thesis') {
+          lines.push(`PB  - ${document.getElementById('institution').value.trim()}`);
+        } else if (type === 'report') {
+          lines.push(`PB  - ${document.getElementById('report-institution').value.trim()}`);
+        } else if (type === 'patent') {
+          lines.push(`ID  - ${document.getElementById('patent-number').value.trim()}`);
+        }
+        // common
+        if (year) lines.push(`PY  - ${year}`);
+        if (document.getElementById('url').value.trim()) lines.push(`UR  - ${document.getElementById('url').value.trim()}`);
+        lines.push('ER  -');
+
+        const risText = lines.join('\n');
+        const name = (document.getElementById('title').value.trim().slice(0,40) || 'citation').replace(/\s+/g,'_').replace(/[^\w\-]/g,'');
+        downloadFile(`${name}.ris`, risText, 'text/plain;charset=utf-8');
+      }
+
+      function makeBibKey(authorsBib, year) {
+        // authorsBib like "Last, First and Other, Name" or "Unknown"
+        let last = 'item';
+        if (authorsBib && authorsBib !== 'Unknown') {
+          const firstAuthor = authorsBib.split(' and ')[0].trim();
+          // firstAuthor might be "Last, First" => last is first token before comma
+          const commaIndex = firstAuthor.indexOf(',');
+          last = commaIndex > -1 ? firstAuthor.substring(0, commaIndex).replace(/\s+/g,'') : firstAuthor.split(/\s+/)[0];
+        }
+        return `${last}${year || ''}`;
+      }
+
+      function escapeBib(s) {
+        if (!s) return '';
+        return s.replace(/\\/g, '\\\\').replace(/{/g,'\\{').replace(/}/g,'\\}').replace(/"/g,'\\"');
+      }
+
+      function downloadFile(filename, content, mime) {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      function formatAccessDate() {
+        const ad = document.getElementById('access-date').value;
+        if (!ad) return '';
+        const d = new Date(ad);
+        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      }
+
+    }); // DOMContentLoaded end
+  </script>
 </body>
 </html>
