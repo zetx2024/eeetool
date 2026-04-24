@@ -625,6 +625,49 @@
                 padding: 1.5rem;
             }
         }
+    
+    
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 10px 0;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 25s linear infinite;
+}
+
+.ticker-move:hover {
+  animation-play-state: paused; /* Pauses when user hovers to read */
+}
+
+.ticker-item {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  padding-right: 100%; /* Ensures smooth looping */
+}
+
+.ticker-item a {
+  color: #D4AF37; /* The gold color from your original code */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ticker-item a:hover {
+  text-decoration: underline;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}   
+    
     </style>
 </head>
 <body>
@@ -656,7 +699,18 @@
             </div>
         </div>
     </section>
-
+<br>
+<div class="ticker-wrap">
+  <div class="ticker-move">
+    <span class="ticker-item">
+      🌟 <strong><a href="https://regi.iarco.org/">Register now</a> for the 3rd International Academic Research Competition (IARCO) 2026! Compete on a global stage across two categories: Junior (Grades 7–12 & Gap Year) and Senior (Undergraduate through all higher education levels). Beginners are highly encouraged to apply—all participants receive exclusive access to our comprehensive guide, "How to Write a Research Proposal Properly," to help develop your research skills. IARCO 2026 is proudly sponsored by</strong> 
+      <a href="https://savemyexams.com/">SaveMyExams</a> (Awarding 1-Year Premium Subscriptions to the Top 20 Junior winners), 
+      <a href="https://domain.me">domain.ME</a> (Providing free domain coupons for the Top 20 winners in each category, plus a 50% discount for all participants!), and 
+      YRJ (Providing cash rewards as outlined on our <a href="https://iarco.org/prizes">prizes page</a>). For more details, visit <a href="https://iarco.org/">https://iarco.org</a>.
+    </span>
+  </div>
+</div>
+ <br>
     <section id="calculator" class="calculator-section">
         <div class="container">
             <h2 class="section-title">Sample Size Calculator</h2>
@@ -948,7 +1002,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Youth Research Journal</h3>
-                    <p>Empowering student researchers with tools and knowledge for academic excellence. Developed by <a href="https://md-sanaul-haque-shanto.github.io/">Md Sanaul Haque Shanto</a></p>
+                    <p>Empowering student researchers with tools and knowledge for academic excellence. Developed by <a href="https://iarco.org/sanaul-haque">Sanaul Haque</a></p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
