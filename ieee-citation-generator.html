@@ -67,6 +67,49 @@
     .export-row { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
     .small-btn { padding:8px 12px; font-size:13px; width:auto; }
     @media (max-width:768px) { .main-content { flex-direction:column; } .citation-item .copy-btn { position:static; display:inline-block; margin-right:8px; } .delete-btn { position:static; display:inline-block; } }
+  
+  
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 10px 0;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 25s linear infinite;
+}
+
+.ticker-move:hover {
+  animation-play-state: paused; /* Pauses when user hovers to read */
+}
+
+.ticker-item {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  padding-right: 100%; /* Ensures smooth looping */
+}
+
+.ticker-item a {
+  color: #D4AF37; /* The gold color from your original code */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ticker-item a:hover {
+  text-decoration: underline;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}  
+  
   </style>
 </head>
 <body>
@@ -76,7 +119,18 @@
       <p class="subtitle">Generate accurate IEEE citations with YRJ</p>
     </div>
   </header>
-
+<br>
+   <div class="ticker-wrap">
+  <div class="ticker-move">
+    <span class="ticker-item">
+      🌟 <strong><a href="https://regi.iarco.org/">Register now</a> for the 3rd International Academic Research Competition (IARCO) 2026! Compete on a global stage across two categories: Junior (Grades 7–12 & Gap Year) and Senior (Undergraduate through all higher education levels). Beginners are highly encouraged to apply—all participants receive exclusive access to our comprehensive guide, "How to Write a Research Proposal Properly," to help develop your research skills. IARCO 2026 is proudly sponsored by</strong> 
+      <a href="https://savemyexams.com/">SaveMyExams</a> (Awarding 1-Year Premium Subscriptions to the Top 20 Junior winners), 
+      <a href="https://domain.me">domain.ME</a> (Providing free domain coupons for the Top 20 winners in each category, plus a 50% discount for all participants!), and 
+      YRJ (Providing cash rewards as outlined on our <a href="https://iarco.org/prizes">prizes page</a>). For more details, visit <a href="https://iarco.org/">https://iarco.org</a>.
+    </span>
+  </div>
+</div>
+   <br>
   <div class="container">
     <div class="main-content">
       <section class="form-section">
@@ -300,9 +354,8 @@
   <footer>
     <div class="container" style="text-align:center; margin-top:20px;">
       <p>IEEE Advanced Citation Generator | For academic and research purposes</p>
-      <p>Developed by <a href="https://md-sanaul-haque-shanto.github.io/">Md Sanaul Haque Shanto</a></p>
-      <p>Organized by Youth Research Journal - Research Competition and Flagship Research Program for High School and University Students</p>
-      <p>Note: Always verify generated citations with your institution's style guide.</p>
+      <p>Developed by <a href="https://iarco.org/sanaul-haque/">Sanaul Haque</a></p>
+      
     </div>
   </footer>
 
